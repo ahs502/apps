@@ -3,8 +3,8 @@
 import * as path from 'path'
 import * as express from 'express'
 import * as cookieParser from 'cookie-parser'
-import * as createError from 'http-errors'
 import * as http from 'http'
+import createError from 'http-errors'
 
 import 'colors'
 
@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
 app.use((req, res, next) => {
-  console.log(req.method.yellow, req.url.bold)
+  console.log(req.method.cyan, req.url)
   next()
 })
 

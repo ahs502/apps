@@ -4,10 +4,10 @@
   "description": "AHS 502 - Server",
   "author": "Hessamoddin A Shokravi <ahs502@gmail.com>",
   "private": true,
-  "main": "server.ts",
+  "main": "src/server.ts",
   "scripts": {
-    "start": "ts-node ./server.ts",
-    "dev": "nodemon --watch api --ext ts,js,json --verbose --exec \"npm start\"",
+    "start": "ts-node ./src/server.ts",
+    "dev": "nodemon --watch src --ext ts,js,json --verbose --exec \"npm start\"",
     "updates:check": "ncu",
     "updates:install": "ncu -u && npm install"
   },
