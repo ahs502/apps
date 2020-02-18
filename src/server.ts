@@ -4,7 +4,7 @@ import * as path from 'path'
 import * as express from 'express'
 import * as cookieParser from 'cookie-parser'
 import * as http from 'http'
-import createError from 'http-errors'
+import * as createError from 'http-errors'
 
 import 'colors'
 
@@ -19,7 +19,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, '../public')))
 
 import apiRouter from './api'
 app.use('/api', apiRouter)

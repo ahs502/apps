@@ -9,7 +9,8 @@
     "start": "ts-node ./src/server.ts",
     "dev": "nodemon --watch src --ext ts,js,json --verbose --exec \"npm start\"",
     "updates:check": "ncu",
-    "updates:install": "ncu -u && npm install"
+    "updates:install": "ncu -u && npm install",
+    "ts-node": "ts-node"
   },
   "dependencies": {
     "colors": "^1.4.0",
