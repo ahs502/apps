@@ -14,6 +14,11 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
+app.use((req, res, next) => {
+  console.log(req.method.yellow, req.url.bold)
+  next()
+})
+
 app.use(express.static(path.join(__dirname, 'public')))
 
 import apiRouter from './api'
