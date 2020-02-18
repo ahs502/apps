@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-const createError = require('http-errors')
-const express = require('express')
-const path = require('path')
-const cookieParser = require('cookie-parser')
-const http = require('http')
+import * as path from 'path'
+import * as express from 'express'
+import * as cookieParser from 'cookie-parser'
+import * as createError from 'http-errors'
+import * as http from 'http'
 
-require('colors')
+import 'colors'
 
 const app = express()
 
@@ -16,14 +16,14 @@ app.use(cookieParser())
 
 app.use(express.static(path.join(__dirname, 'public')))
 
-const apiRouter = require('./api')
+import apiRouter from './api'
 app.use('/api', apiRouter)
 
 app.use((req, res, next) => {
   next(createError(404))
 })
 app.use((err, req, res, next) => {
-  console.error('>> Error:'.bold.red, err)
+  console.error('>> Error:'.red.bold, err)
 
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}
@@ -39,7 +39,7 @@ const server = http.createServer(app)
 
 server.listen(port)
 
-server.on('error', error => {
+server.on('error', (error: any) => {
   if (error.syscall !== 'listen') throw error
 
   const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port
