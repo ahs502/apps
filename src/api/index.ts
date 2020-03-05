@@ -3,6 +3,6 @@ const router = express.Router()
 
 export default router
 
-import testRouter from './test'
+import authRouter from './auth'
 
-router.use('/test', testRouter)
+router.use('/auth', authRouter)
