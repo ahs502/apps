@@ -5,6 +5,7 @@ const errorElement = document.getElementById('error')
 
 const urlParams = new URLSearchParams(window.location.search)
 const app = urlParams.get('app')
+const url = urlParams.get('url')
 
 if (!app) {
   formElement.remove()
@@ -57,7 +58,7 @@ async function submit() {
       return
     }
 
-    window.location.href = `${window.location.origin}/${app}?code=${response.authCode}`
+    window.location.href = `${url ? url : `${window.location.origin}/${app}`}?code=${response.authCode}`
   } catch (reason) {
     console.error(reason)
     setError(reason)
