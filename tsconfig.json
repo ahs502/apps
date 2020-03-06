@@ -9,5 +9,5 @@
     "baseUrl": ".",
     "paths": {}
   },
-  "include": ["src/server.ts", "src/api/**/*.ts"]
+  "include": ["src/**/*.ts"]
 }

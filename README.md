@@ -1,4 +1,4 @@
-# ahs502-server
+# AHS 502 - Apps
 
 ### Start the server:
 
