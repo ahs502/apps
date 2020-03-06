@@ -12,9 +12,15 @@ You can use `STORAGE_PATH` to override the default storage path (`data` director
 
 ### Start the server for development:
 
-    $ npm run develop
+    $ npm run develop:server
 
 You can use `STORAGE_PATH` to override the default storage path (`data` directory under the package root folder)
+
+### Start the server and all apps for development:
+
+    $ npm run develop
+
+    TODO: Paths, Ports, develop:website, descriptions
 
 ### Check for package updates:
 
