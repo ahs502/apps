@@ -1,5 +1,9 @@
 # AHS 502 - Apps
 
+### Prepare packages (main and app projects):
+
+    $ npm install
+
 ### Start the server:
 
     $ npm start

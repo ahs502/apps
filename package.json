@@ -6,10 +6,13 @@
   "private": true,
   "main": "src/server.ts",
   "scripts": {
+    "postinstall": "npm install --prefix apps/website",
     "start": "ts-node ./src/server.ts",
     "develop": "nodemon --watch src --ext ts,js,json --verbose --exec \"npm start\"",
     "updates:check": "ncu",
     "updates:install": "ncu -u && npm install",
+    "build": "npm run build:website",
+    "build:website": "npm run --prefix apps/website build",
     "ts-node": "ts-node"
   },
   "dependencies": {
