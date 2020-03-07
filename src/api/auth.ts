@@ -1,6 +1,6 @@
 import * as express from 'express'
 
-import withoutAuthentication from 'src/api/utils/without-authentication'
+import withoutAuthentication from './utils/without-authentication'
 import { login, logout } from '../store'
 
 const router = express.Router()

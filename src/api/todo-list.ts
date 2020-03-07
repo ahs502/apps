@@ -1,6 +1,6 @@
 import * as express from 'express'
 
-import withAuthentication from 'src/api/utils/with-authentication'
+import withAuthentication from './utils/with-authentication'
 import { readTodoBook, addTodo, removeTodo, editTodo } from '../store'
 
 const router = express.Router()
