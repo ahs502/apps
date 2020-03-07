@@ -23,8 +23,8 @@ And, `PORT` to override the default port, which is `3000`.
 
 The server will start on `4000` and the _app_ will start on `4001`. The server storage path will be the `data-dev` directory under the package root folder.
 
-    $ npm run develop             # Only server
-    $ npm run develop:app-name    # Server and some app
+    $ npm run develop              # Only server
+    $ npm run develop:<AppName>    # Server and some app
 
 ### Build apps:
 
