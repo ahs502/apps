@@ -19,8 +19,9 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use(express.static(path.join(__dirname, '../public')))
-app.use(express.static(path.join(__dirname, '../static')))
+app.use('/auth', express.static(path.join(__dirname, '../public/auth')))
+app.use('/', express.static(path.join(__dirname, '../public/website')))
+app.use('/todo-list', express.static(path.join(__dirname, '../public/todo-list')))
 
 import apiRouter from './api'
 app.use('/api', apiRouter)
