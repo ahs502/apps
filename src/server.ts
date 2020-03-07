@@ -38,7 +38,7 @@ app.use((err, req, res, next) => {
   res.send(err)
 })
 
-const port = process.env.PORT || '25200'
+const port = process.env.PORT || '3000'
 app.set('port', port)
 
 const server = http.createServer(app)
