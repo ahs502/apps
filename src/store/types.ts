@@ -1,1 +1,1 @@
-export type App = 'todo-list' | 'prayers-counter'
+export type App = 'todo-list' // | 'prayers-counter'

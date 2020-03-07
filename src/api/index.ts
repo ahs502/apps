@@ -12,3 +12,6 @@ router.get('/ping', async (req, res, next) => {
 
 import authRouter from './auth'
 router.use('/auth', authRouter)
+
+import todoListRouter from './todo-list'
+router.use('/todo-list', todoListRouter)

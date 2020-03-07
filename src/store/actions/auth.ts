@@ -86,7 +86,7 @@ interface AuthCodeVerificationResult {
  * @param agent Client agent
  */
 export async function verifyAuthCode(app: App, authCode: string, ip: string, agent: string): Promise<AuthCodeVerificationResult> {
-  const session: Kfs['auth']['sessions'][string] = await kfs(`auth/sessions/${authCode}`)
+  const session: Kfs['auth']['sessions'][string] = authCode ? await kfs(`auth/sessions/${authCode}`) : null
   const result = verify()
   if (!result.verified) {
     await logout(authCode)
