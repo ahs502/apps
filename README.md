@@ -1,6 +1,6 @@
 # AHS 502 - Apps
 
-### Prepare packages (main and app projects):
+### Prepare package:
 
     $ npm install
 
@@ -10,6 +10,10 @@
 
 You can use `STORAGE_PATH` to override the default storage path, which is the `data` directory under the package root folder.
 And, `PORT` to override the default port, which is `25200`.
+
+### Prepare packages for development (main and app projects):
+
+    $ npm run install:all
 
 ### Start the server and any app for development:
 
