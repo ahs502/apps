@@ -12,14 +12,16 @@ interface AuthenticationOptions {
 interface Kfs {
   readonly auth: {
     readonly passwords: {
-      readonly [app in App]: {
-        readonly password: string
-        readonly scope?: any
-        readonly authenticationOptions?: AuthenticationOptions
-      }[]
+      readonly [app in App]:
+        | null
+        | {
+            readonly password: string
+            readonly scope?: any
+            readonly authenticationOptions?: AuthenticationOptions
+          }[]
     }
     readonly sessions: {
-      readonly [authCode: string]: {
+      readonly [authCode: string]: null | {
         readonly app: App
         readonly scope?: any
         readonly ip?: string
@@ -42,7 +44,7 @@ interface Kfs {
  */
 export async function login(app: App, password: string, ip: string, agent: string, authenticationOptions?: AuthenticationOptions): Promise<string> {
   const appPasswords: Kfs['auth']['passwords'][App] = await kfs(`auth/passwords/${app}`)
-  const matchingAppPassword = appPasswords.find(appPassword => appPassword.password === password)
+  const matchingAppPassword = appPasswords && appPasswords.find(appPassword => appPassword.password === password)
   if (!matchingAppPassword) return ''
   const allAuthCodePaths: string[] = await kfs('auth/sessions/')
   const allAuthCodes = allAuthCodePaths.map(p => p.replace('auth/sessions/', ''))
