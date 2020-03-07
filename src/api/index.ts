@@ -3,6 +3,12 @@ const router = express.Router()
 
 export default router
 
-import authRouter from './auth'
+router.get('/ping', async (req, res, next) => {
+  res
+    .send('pong')
+    .status(200)
+    .end()
+})
 
+import authRouter from './auth'
 router.use('/auth', authRouter)
