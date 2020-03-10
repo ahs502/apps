@@ -20,7 +20,7 @@ export async function login(app: App, password: string, ip: string, agent: strin
   let authCode: string
   do {
     authCode = cryptoRandomString({
-      length: 24,
+      length: 8,
       characters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     })
   } while (allAuthCodes.includes(authCode))

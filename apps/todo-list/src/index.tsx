@@ -1,9 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { CssBaseline, ThemeProvider } from '@material-ui/core'
+
+import checkAuthentication from './utils/check-authentication'
 import theme from './theme'
 import App from './App'
 // import * as serviceWorker from './serviceWorker';
+
+checkAuthentication()
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>

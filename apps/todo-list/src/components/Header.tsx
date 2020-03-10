@@ -1,30 +1,40 @@
 import React from 'react'
 import { Theme, AppBar, Toolbar, Typography, Box, IconButton, Button } from '@material-ui/core'
 import { useTheme } from '@material-ui/styles'
-import { Cached as CachedIcon } from '@material-ui/icons'
+import { Cached as CachedIcon, ExitToApp as ExitIcon } from '@material-ui/icons'
 
 interface Props {
   book: Book | null
-  refreshing?: boolean
+  refreshable?: boolean
   onRefresh(): void
+  onExit(): void
 }
 
-export default function Header({ book, refreshing, onRefresh }: Props) {
+export default function Header({ book, refreshable, onRefresh, onExit }: Props) {
   const theme = useTheme<Theme>()
 
   return (
     <AppBar position="absolute">
       <Toolbar>
-        <Typography variant="h6">Todo List</Typography>
+        <IconButton color="inherit" onClick={onExit}>
+          <ExitIcon />
+        </IconButton>
+        <Box marginX={2}>
+          <Typography variant="h6" noWrap>
+            Todo List
+          </Typography>
+        </Box>
         {book && (
-          <Box marginLeft={2}>
-            <Typography variant="subtitle2">{book.name}</Typography>
-          </Box>
+          <Typography variant="subtitle2" noWrap>
+            {book.name}
+          </Typography>
         )}
         <Box flexGrow={1} />
-        <Button variant="outlined" color="inherit" size="large" endIcon={<CachedIcon color="inherit" />} disabled={refreshing} onClick={onRefresh}>
-          Refresh&nbsp;&nbsp;
-        </Button>
+        <Box flexGrow={0} flexShrink={0} marginLeft={2}>
+          <Button variant="outlined" color="inherit" endIcon={<CachedIcon />} disabled={!refreshable} onClick={onRefresh}>
+            Refresh&nbsp;&nbsp;
+          </Button>
+        </Box>
       </Toolbar>
     </AppBar>
   )

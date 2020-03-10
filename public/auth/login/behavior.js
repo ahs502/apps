@@ -58,7 +58,7 @@ async function submit() {
       return
     }
 
-    window.location.href = `${url ? url : `${window.location.origin}/${app}`}?code=${response.authCode}`
+    window.location.href = `${url ? url : `${window.location.origin}/${app}`}?auth-code=${response.authCode}`
   } catch (reason) {
     console.error(reason)
     setError(reason)
