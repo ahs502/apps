@@ -1,15 +1,21 @@
-import React from 'react'
-import { Typography } from '@material-ui/core'
+import React, { useState } from 'react'
+import { Theme, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/styles'
+import Header from './components/Header'
 
-//TODO: Use react-beautiful-dnd
-// https://github.com/atlassian/react-beautiful-dnd
-// https://codesandbox.io/s/zfoyo
+const useStyles = makeStyles((theme: Theme) => ({
+  //...
+}))
 
 function App() {
+  const [book, setBook] = useState<Book | null>(null)
+
+  const classes = useStyles()
+
   return (
-    <Typography variant="h1" color="primary">
-      Todo List
-    </Typography>
+    <>
+      <Header book={book} refreshing={true} onRefresh={() => {}} />
+    </>
   )
 }
 

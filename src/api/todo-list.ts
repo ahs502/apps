@@ -8,7 +8,7 @@ const router = express.Router()
 export default router
 
 type NamedBook = Store['books'][string] & {
-  readonly bookName: string
+  readonly name: string
 }
 
 /* prettier-ignore */ ''; // In order to prevent syntax highlighter from messing up!
@@ -16,13 +16,10 @@ type NamedBook = Store['books'][string] & {
 router.get(
   '/book',
   withAuthentication('todo-list', async (req, res, next, scope) => {
-    const bookName = getBookName(scope)
+    const name = getBookName(scope)
 
-    const book = await readTodoBook(bookName)
-    const namedBook: NamedBook = {
-      bookName,
-      ...book
-    }
+    const book = await readTodoBook(name)
+    const namedBook: NamedBook = { name, ...book }
 
     res
       .json(namedBook)
@@ -35,13 +32,10 @@ router.post(
   '/book/todo',
   withAuthentication('todo-list', async (req, res, next, scope) => {
     const { title, position } = req.body || {}
-    const bookName = getBookName(scope)
+    const name = getBookName(scope)
 
-    const book = await addTodo(bookName, title, position)
-    const namedBook: NamedBook = {
-      bookName,
-      ...book
-    }
+    const book = await addTodo(name, title, position)
+    const namedBook: NamedBook = { name, ...book }
 
     res
       .json(namedBook)
@@ -54,13 +48,10 @@ router.delete(
   '/book/todo',
   withAuthentication('todo-list', async (req, res, next, scope) => {
     const { id } = req.body || {}
-    const bookName = getBookName(scope)
+    const name = getBookName(scope)
 
-    const book = await removeTodo(bookName, id)
-    const namedBook: NamedBook = {
-      bookName,
-      ...book
-    }
+    const book = await removeTodo(name, id)
+    const namedBook: NamedBook = { name, ...book }
 
     res
       .json(namedBook)
@@ -73,13 +64,10 @@ router.put(
   '/book/todo',
   withAuthentication('todo-list', async (req, res, next, scope) => {
     const { id, title, checked, position } = req.body || {}
-    const bookName = getBookName(scope)
+    const name = getBookName(scope)
 
-    const book = await editTodo(bookName, id, title, checked, position)
-    const namedBook: NamedBook = {
-      bookName,
-      ...book
-    }
+    const book = await editTodo(name, id, title, checked, position)
+    const namedBook: NamedBook = { name, ...book }
 
     res
       .json(namedBook)

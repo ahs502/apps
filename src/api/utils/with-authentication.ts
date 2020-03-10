@@ -1,8 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 
-import { App } from '../../store/types'
-
-import { verifyAuthCode } from '../../store'
+import { verifyAuthCode, App } from '../../store'
 
 export default function withAuthentication(
   app: App,

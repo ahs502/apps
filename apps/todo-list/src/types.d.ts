@@ -1,5 +1,5 @@
 declare interface Book {
-  readonly bookName: string
+  readonly name: string
   readonly version: 1
   readonly timestamp: number
   readonly idBase: number
