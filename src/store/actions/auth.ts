@@ -1,37 +1,6 @@
 import * as cryptoRandomString from 'crypto-random-string'
 
-import { App } from '../types'
-import kfs from '../kfs'
-
-interface AuthenticationOptions {
-  readonly checkForIp?: boolean
-  readonly checkForAgent?: boolean
-  readonly lifeTime?: number
-}
-
-interface Kfs {
-  readonly auth: {
-    readonly passwords: {
-      readonly [app in App]:
-        | null
-        | {
-            readonly password: string
-            readonly scope?: any
-            readonly authenticationOptions?: AuthenticationOptions
-          }[]
-    }
-    readonly sessions: {
-      readonly [authCode: string]: null | {
-        readonly app: App
-        readonly scope?: any
-        readonly ip?: string
-        readonly agent?: string
-        readonly createdAt: number
-        readonly expiresAt?: number
-      }
-    }
-  }
-}
+import kfs, { Store, App, AuthenticationOptions } from '../kfs'
 
 /**
  * Logs in and generates the `authCode` if `password` for `app` is valid.
@@ -43,7 +12,7 @@ interface Kfs {
  * @param authenticationOptions The authentication options if nothing is provided by the app password
  */
 export async function login(app: App, password: string, ip: string, agent: string, authenticationOptions?: AuthenticationOptions): Promise<string> {
-  const appPasswords: Kfs['auth']['passwords'][App] = await kfs(`auth/passwords/${app}`)
+  const appPasswords: Store['auth']['passwords'][App] = await kfs(`auth/passwords/${app}`)
   const matchingAppPassword = appPasswords && appPasswords.find(appPassword => appPassword.password === password)
   if (!matchingAppPassword) return ''
   const allAuthCodePaths: string[] = await kfs('auth/sessions/')
@@ -60,7 +29,7 @@ export async function login(app: App, password: string, ip: string, agent: strin
       checkForAgent: true,
       lifeTime: 356 * 24 * 60 * 60 * 1000 // 1 year
     }
-  const session: Kfs['auth']['sessions'][string] = {
+  const session: Store['auth']['sessions'][string] = {
     app,
     scope: matchingAppPassword.scope,
     ip: options.checkForIp ? ip : '',
@@ -86,7 +55,7 @@ interface AuthCodeVerificationResult {
  * @param agent Client agent
  */
 export async function verifyAuthCode(app: App, authCode: string, ip: string, agent: string): Promise<AuthCodeVerificationResult> {
-  const session: Kfs['auth']['sessions'][string] = authCode ? await kfs(`auth/sessions/${authCode}`) : null
+  const session: Store['auth']['sessions'][string] = authCode ? await kfs(`auth/sessions/${authCode}`) : null
   const result = verify()
   if (!result.verified) {
     await logout(authCode)

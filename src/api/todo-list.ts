@@ -1,24 +1,31 @@
 import * as express from 'express'
 
 import withAuthentication from './utils/with-authentication'
-import { readTodoBook, addTodo, removeTodo, editTodo } from '../store'
+import { readTodoBook, addTodo, removeTodo, editTodo, Store } from '../store'
 
 const router = express.Router()
 
 export default router
+
+type NamedBook = Store['books'][string] & {
+  readonly bookName: string
+}
+
+/* prettier-ignore */ ''; // In order to prevent syntax highlighter from messing up!
 
 router.get(
   '/book',
   withAuthentication('todo-list', async (req, res, next, scope) => {
     const bookName = getBookName(scope)
 
-    const todoBook = await readTodoBook(bookName)
+    const book = await readTodoBook(bookName)
+    const namedBook: NamedBook = {
+      bookName,
+      ...book
+    }
 
     res
-      .json({
-        bookName,
-        ...todoBook
-      })
+      .json(namedBook)
       .status(200)
       .end()
   })
@@ -30,13 +37,14 @@ router.post(
     const { title, position } = req.body || {}
     const bookName = getBookName(scope)
 
-    const todoBook = await addTodo(bookName, title, position)
+    const book = await addTodo(bookName, title, position)
+    const namedBook: NamedBook = {
+      bookName,
+      ...book
+    }
 
     res
-      .json({
-        bookName,
-        ...todoBook
-      })
+      .json(namedBook)
       .status(200)
       .end()
   })
@@ -48,13 +56,14 @@ router.delete(
     const { id } = req.body || {}
     const bookName = getBookName(scope)
 
-    const todoBook = await removeTodo(bookName, id)
+    const book = await removeTodo(bookName, id)
+    const namedBook: NamedBook = {
+      bookName,
+      ...book
+    }
 
     res
-      .json({
-        bookName,
-        ...todoBook
-      })
+      .json(namedBook)
       .status(200)
       .end()
   })
@@ -66,18 +75,19 @@ router.put(
     const { id, title, checked, position } = req.body || {}
     const bookName = getBookName(scope)
 
-    const todoBook = await editTodo(bookName, id, title, checked, position)
+    const book = await editTodo(bookName, id, title, checked, position)
+    const namedBook: NamedBook = {
+      bookName,
+      ...book
+    }
 
     res
-      .json({
-        bookName,
-        ...todoBook
-      })
+      .json(namedBook)
       .status(200)
       .end()
   })
 )
 
 function getBookName(scope: any): string {
-  return scope || 'public'
+  return scope || '_public_'
 }
