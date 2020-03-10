@@ -10,7 +10,12 @@
       "name": "Debug Server",
       "skipFiles": ["<node_internals>/**"],
       "runtimeArgs": ["-r", "ts-node/register"],
-      "args": ["${workspaceFolder}/src/server.ts"]
+      "args": ["${workspaceFolder}/src/server.ts"],
+      "env": {
+        "PORT": "4000",
+        "RELATIVE_STORAGE_PATH": "data-dev",
+        "ENV": "development"
+      }
     }
   ]
 }

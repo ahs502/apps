@@ -10,6 +10,12 @@ import 'colors'
 
 const app = express()
 
+const env = process.env['ENV'] || 'production' // 'development' or 'production'
+app.set('env', env)
+
+const port = process.env['PORT'] || '3000'
+app.set('port', port)
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
@@ -38,9 +44,6 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500)
   res.send(err)
 })
-
-const port = process.env.PORT || '3000'
-app.set('port', port)
 
 const server = http.createServer(app)
 

@@ -7,7 +7,7 @@
   "main": "src/server.ts",
   "scripts": {
     "start": "ts-node ./src/server.ts",
-    "start:dev": "cross-env PORT=4000 RELATIVE_STORAGE_PATH=data-dev npm start",
+    "start:dev": "cross-env PORT=4000 RELATIVE_STORAGE_PATH=data-dev ENV=development npm start",
     "install:all": "npm install && npm install --prefix apps/website && npm install --prefix apps/todo-list",
     "develop": "nodemon --watch src --ext ts,js,json --verbose --exec \"npm run start:dev\"",
     "develop:website": "concurrently -k -p \"[{index}] [{time}] [{name}]\" -n \"Server,Client\" -c \"blue,green\" \"npm run develop\" \"npm start --prefix apps/website\"",
