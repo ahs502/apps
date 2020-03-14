@@ -1,6 +1,6 @@
 import persistant from './persistant'
 
-export default function checkAuthentication(): void {
+export function checkAuthentication(): void {
   const urlParams = new URLSearchParams(window.location.search)
   const authCodeFromUrl = urlParams.get('auth-code')
   const authCodeFromLocalStorage = persistant['auth-code']
@@ -11,4 +11,9 @@ export default function checkAuthentication(): void {
   } else if (!authCodeFromLocalStorage) {
     window.location.href = `${config.loginUrl}/auth/login/?app=${config.app}&url=${window.location.origin}`
   }
+}
+
+export function logout(): void {
+  delete persistant['auth-code']
+  window.location.reload()
 }

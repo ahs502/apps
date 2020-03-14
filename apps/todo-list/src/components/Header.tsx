@@ -3,20 +3,21 @@ import { Theme, AppBar, Toolbar, Typography, Box, IconButton, Button } from '@ma
 import { useTheme } from '@material-ui/styles'
 import { Cached as CachedIcon, ExitToApp as ExitIcon } from '@material-ui/icons'
 
+import { logout } from '../utils/auth'
+
 interface Props {
   book: Book | null
   refreshable?: boolean
   onRefresh(): void
-  onExit(): void
 }
 
-export default function Header({ book, refreshable, onRefresh, onExit }: Props) {
+export default function Header({ book, refreshable, onRefresh }: Props) {
   const theme = useTheme<Theme>()
 
   return (
     <AppBar position="absolute">
       <Toolbar>
-        <IconButton color="inherit" onClick={onExit}>
+        <IconButton color="inherit" onClick={() => logout()}>
           <ExitIcon />
         </IconButton>
         <Box marginX={2}>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Theme, Typography } from '@material-ui/core'
+import { Theme, Typography, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
 import useBookApi from './utils/use-book-api'
@@ -18,7 +18,10 @@ function App() {
 
   return (
     <>
-      <Header book={book} refreshable={!status} onRefresh={() => readBook().then(setBook)} onExit={() => {}} />
+      <Header book={book} refreshable={!status} onRefresh={() => readBook().then(setBook)} />
+      <Box marginTop={10}>
+        <pre>{status ? status : book ? JSON.stringify(book, null, 4) : 'Nothing!'}</pre>
+      </Box>
     </>
   )
 }

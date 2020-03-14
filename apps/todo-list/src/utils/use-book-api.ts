@@ -18,16 +18,16 @@ export default function useBookApi() {
   }
 
   async function readBook(): Promise<Book> {
-    return await makeRequest('reading book', apiFetch('GET', `/api/todo-list/book`))
+    return await makeRequest('reading book', apiFetch('GET', `todo-list/book`))
   }
   async function addTodo(title: string, position?: number): Promise<Book> {
-    return await makeRequest('adding todo', apiFetch('POST', `/api/todo-list/book/todo`, { title, position }))
+    return await makeRequest('adding todo', apiFetch('POST', `todo-list/book/todo`, { title, position }))
   }
   async function removeTodo(id: number): Promise<Book> {
-    return await makeRequest('removing todo', apiFetch('DELETE', `/api/todo-list/book/todo`, { id }))
+    return await makeRequest('removing todo', apiFetch('DELETE', `todo-list/book/todo`, { id }))
   }
   async function editTodo(id: number, title: string | undefined, checked: boolean | undefined, position: number | undefined): Promise<Book> {
-    return await makeRequest('editing todo', apiFetch('PUT', `/api/todo-list/book/todo`, { id, title, checked, position }))
+    return await makeRequest('editing todo', apiFetch('PUT', `todo-list/book/todo`, { id, title, checked, position }))
   }
 
   async function editTodoTitle(id: number, title: string) {
