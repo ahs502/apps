@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import persistant from './persistant'
+import { apiFetch } from '../../../core/api-fetch'
 
 type Status = 'reading book' | 'adding todo' | 'removing todo' | 'editing todo'
 
@@ -40,16 +40,6 @@ export default function useBookApi() {
     return await editTodo(id, undefined, undefined, position)
   }
 
-  function apiFetch(method: 'GET' | 'POST' | 'DELETE' | 'PUT', path: string, body?: any) {
-    return fetch(`/api/${path}`, {
-      method,
-      headers: {
-        'auth-code': persistant['auth-code']!,
-        'Content-Type': 'application/json'
-      },
-      body: body ? JSON.stringify(body) : undefined
-    })
-  }
   async function makeRequest(status: Status, request: Promise<Response>): Promise<Book> {
     if (!status) throw new Error(`Not possible while ${status}.`)
 

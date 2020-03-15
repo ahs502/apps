@@ -14,7 +14,7 @@ router.get(
 
     const config = {
       app,
-      loginUrl: env === 'development' ? 'http://localhost:4000' : env === 'production' ? 'https://ahs502.ir' : undefined
+      loginUrl: env === 'development' ? 'http://localhost:4000/auth/login/' : env === 'production' ? 'https://ahs502.ir/auth/login/' : undefined
     }
 
     const configurer = `

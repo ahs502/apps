@@ -3,7 +3,7 @@ import { Theme, AppBar, Toolbar, Typography, Box, IconButton, Button } from '@ma
 import { useTheme } from '@material-ui/styles'
 import { Cached as CachedIcon, ExitToApp as ExitIcon } from '@material-ui/icons'
 
-import { logout } from '../utils/auth'
+import { logout } from '../../../core/auth'
 
 interface Props {
   book: Book | null

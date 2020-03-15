@@ -1,10 +1,9 @@
 declare const config: {
-  readonly app: string
-  readonly loginUrl: string
+  readonly x: number
 }
 
 declare interface Persistant {
-  'auth-code'?: string
+  x: number
 }
 
 declare interface Book {
