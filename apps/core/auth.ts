@@ -9,7 +9,7 @@ export function authenticate(): void {
     persistant['auth-code'] = authCodeFromUrl
     window.history.replaceState(null, '', window.location.pathname)
   } else if (!authCodeFromLocalStorage) {
-    window.location.href = `${config.loginUrl}?app=${config.app}&url=${window.location.origin}`
+    window.location.href = `${config.loginUrl}?app=${config.app}&url=${window.location.origin}${window.location.pathname}`
   }
 }
 
