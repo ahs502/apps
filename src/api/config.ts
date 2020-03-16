@@ -9,7 +9,7 @@ export default router
 router.get(
   '/:app?',
   withoutAuthentication(async (req, res, next) => {
-    const app = req.param('app')
+    const app = req.params['app']
     const env = req.app.get('env')
 
     const config = {
