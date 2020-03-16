@@ -7,17 +7,17 @@ import { logout } from '../../../core/auth'
 
 interface Props {
   book: Book | null
-  refreshable?: boolean
+  disabled?: boolean
   onRefresh(): void
 }
 
-export default function Header({ book, refreshable, onRefresh }: Props) {
+export default function Header({ book, disabled, onRefresh }: Props) {
   const theme = useTheme<Theme>()
 
   return (
     <AppBar position="absolute">
       <Toolbar>
-        <IconButton color="inherit" onClick={() => logout()}>
+        <IconButton color="inherit" disabled={disabled} onClick={() => logout()}>
           <ExitIcon />
         </IconButton>
         <Box marginX={2}>
@@ -32,7 +32,7 @@ export default function Header({ book, refreshable, onRefresh }: Props) {
         )}
         <Box flexGrow={1} />
         <Box flexGrow={0} flexShrink={0} marginLeft={2}>
-          <Button variant="outlined" color="inherit" endIcon={<CachedIcon />} disabled={!refreshable} onClick={onRefresh}>
+          <Button variant="outlined" color="inherit" endIcon={<CachedIcon />} disabled={disabled} onClick={onRefresh}>
             Refresh&nbsp;&nbsp;
           </Button>
         </Box>

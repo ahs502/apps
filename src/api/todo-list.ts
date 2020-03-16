@@ -7,7 +7,7 @@ const router = express.Router()
 
 export default router
 
-type NamedBook = Store['books'][string] & {
+type NamedBookData = Omit<Store['books'][string], 'idBase'> & {
   readonly name: string
 }
 
@@ -18,12 +18,12 @@ router.get(
   withAuthentication('todo-list', async (req, res, next, scope) => {
     const name = getBookName(scope)
 
-    const book = await readTodoBook(name)
-    const namedBook: NamedBook = { name, ...book }
+    const { idBase, ...bookData } = await readTodoBook(name)
+    const namedBookData: NamedBookData = { name, ...bookData }
 
     res
       .status(200)
-      .json(namedBook)
+      .json(namedBookData)
       .end()
   })
 )
@@ -34,12 +34,12 @@ router.post(
     const { title, position } = req.body || {}
     const name = getBookName(scope)
 
-    const book = await addTodo(name, title, position)
-    const namedBook: NamedBook = { name, ...book }
+    const { idBase, ...bookData } = await addTodo(name, title, position)
+    const namedBookData: NamedBookData = { name, ...bookData }
 
     res
       .status(200)
-      .json(namedBook)
+      .json(namedBookData)
       .end()
   })
 )
@@ -50,12 +50,12 @@ router.delete(
     const { id } = req.body || {}
     const name = getBookName(scope)
 
-    const book = await removeTodo(name, id)
-    const namedBook: NamedBook = { name, ...book }
+    const { idBase, ...bookData } = await removeTodo(name, id)
+    const namedBookData: NamedBookData = { name, ...bookData }
 
     res
       .status(200)
-      .json(namedBook)
+      .json(namedBookData)
       .end()
   })
 )
@@ -66,12 +66,12 @@ router.put(
     const { id, title, checked, position } = req.body || {}
     const name = getBookName(scope)
 
-    const book = await editTodo(name, id, title, checked, position)
-    const namedBook: NamedBook = { name, ...book }
+    const { idBase, ...bookData } = await editTodo(name, id, title, checked, position)
+    const namedBookData: NamedBookData = { name, ...bookData }
 
     res
       .status(200)
-      .json(namedBook)
+      .json(namedBookData)
       .end()
   })
 )

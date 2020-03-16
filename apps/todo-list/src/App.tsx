@@ -6,6 +6,7 @@ import useBookApi from './utils/use-book-api'
 
 import Header from './components/Header'
 import usePromiseHandler from './utils/use-promise-handler'
+import List from './components/List'
 
 const useStyles = makeStyles((theme: Theme) => ({
   //...
@@ -16,9 +17,13 @@ function App() {
   const { status, readBook, addTodo, removeTodo, editTodoTitle, editTodoChecked, editTodoPosition } = useBookApi()
   const { handlePromise, errorSnackbar } = usePromiseHandler()
 
+  const disabled = !!status
+
+  console.log('book =', book) //TODO: Remove this line later.
+
   async function refresh() {
     const newBook = await handlePromise(readBook, book)
-    setBook(newBook)
+    setBook(book || newBook)
   }
 
   useEffect(() => {
@@ -29,10 +34,8 @@ function App() {
 
   return (
     <>
-      <Header book={book} refreshable={!status} onRefresh={refresh} />
-      <Box marginTop={10}>
-        <pre>{status ? status : book ? JSON.stringify(book, null, 4) : 'Nothing!'}</pre>
-      </Box>
+      <Header book={book} disabled={disabled} onRefresh={refresh} />
+      <List book={book} disabled={disabled} reset={() => book && setBook({ ...book })} />
       {errorSnackbar}
     </>
   )
