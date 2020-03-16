@@ -10,20 +10,23 @@ export default function withAuthentication(
     try {
       const authCode = req.header('auth-code')
       const verificationResult = await verifyAuthCode(app, authCode, req.ip, req.headers['user-agent'])
+
       if (!verificationResult.verified) {
+        console.error('Unauthorized access (401):', verificationResult.reason)
         res
+          .status(401)
           .send(verificationResult.reason)
-          .status(403)
           .end()
         return
       }
+
       const scope = verificationResult.scope
       handle(req, res, next, scope)
     } catch (reason) {
       console.error(reason)
       res
-        .send(String(reason))
         .status(500)
+        .send(String(reason))
         .end()
     }
   }

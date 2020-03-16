@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Theme, Typography, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
@@ -13,6 +13,17 @@ const useStyles = makeStyles((theme: Theme) => ({
 function App() {
   const [book, setBook] = useState<Book | null>(null)
   const { status, readBook, addTodo, removeTodo, editTodoTitle, editTodoChecked, editTodoPosition } = useBookApi()
+
+  // async function refresh(){
+  //   try{
+  //     const book=await readBook()
+  //     setBook(book)
+  //   }catch(reason){
+
+  //   }
+  // }
+
+  // useEffect(()=>)
 
   const classes = useStyles()
 

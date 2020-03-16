@@ -9,8 +9,8 @@ export default function withoutAuthentication(
     } catch (reason) {
       console.error(reason)
       res
-        .send(String(reason))
         .status(500)
+        .send(String(reason))
         .end()
     }
   }

@@ -5,8 +5,8 @@ export default router
 
 router.get('/ping', async (req, res, next) => {
   res
-    .send('pong')
     .status(200)
+    .send('pong')
     .end()
 })
 

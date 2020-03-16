@@ -22,8 +22,8 @@ router.get(
     const namedBook: NamedBook = { name, ...book }
 
     res
-      .json(namedBook)
       .status(200)
+      .json(namedBook)
       .end()
   })
 )
@@ -38,8 +38,8 @@ router.post(
     const namedBook: NamedBook = { name, ...book }
 
     res
-      .json(namedBook)
       .status(200)
+      .json(namedBook)
       .end()
   })
 )
@@ -54,8 +54,8 @@ router.delete(
     const namedBook: NamedBook = { name, ...book }
 
     res
-      .json(namedBook)
       .status(200)
+      .json(namedBook)
       .end()
   })
 )
@@ -70,8 +70,8 @@ router.put(
     const namedBook: NamedBook = { name, ...book }
 
     res
-      .json(namedBook)
       .status(200)
+      .json(namedBook)
       .end()
   })
 )

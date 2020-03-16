@@ -15,11 +15,11 @@ router.post(
     const authCode = await login(app, password, req.ip, req.headers['user-agent'])
 
     res
+      .status(200)
       .json({
         success: !!authCode,
         authCode
       })
-      .status(200)
       .end()
   })
 )
@@ -32,8 +32,8 @@ router.post(
     await logout(authCode)
 
     res
-      .send('Logged out.')
       .status(200)
+      .send('Logged out.')
       .end()
   })
 )

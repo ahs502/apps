@@ -26,8 +26,8 @@ router.get(
     `
 
     res
-      .send(configurer)
       .status(200)
+      .send(configurer)
       .end()
   })
 )
