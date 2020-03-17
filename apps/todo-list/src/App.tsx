@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Theme, Typography, Box } from '@material-ui/core'
+import { Theme, Typography, Box, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
 import useBookApi from './utils/use-book-api'
@@ -22,8 +22,27 @@ function App() {
   console.log('book =', book) //TODO: Remove this line later.
 
   async function refresh() {
-    const newBook = await handlePromise(readBook, book)
-    setBook(book || newBook)
+    const response = await handlePromise(readBook)
+    response.success && setBook(response.result)
+  }
+  async function add(title: string, append: boolean): Promise<boolean> {
+    const position = append ? undefined : 0
+    const response = await handlePromise(() => addTodo(title, position))
+    response.success && setBook(response.result)
+    return response.success
+  }
+  async function check(id: number, checked: boolean) {
+    const response = await handlePromise(() => editTodoChecked(id, checked))
+    response.success && setBook(response.result)
+  }
+  async function edit(id: number, title: string): Promise<boolean> {
+    const response = await handlePromise(() => editTodoTitle(id, title))
+    response.success && setBook(response.result)
+    return response.success
+  }
+  async function remove(id: number) {
+    const response = await handlePromise(() => removeTodo(id))
+    response.success && setBook(response.result)
   }
 
   useEffect(() => {
@@ -35,7 +54,7 @@ function App() {
   return (
     <>
       <Header book={book} disabled={disabled} onRefresh={refresh} />
-      <List book={book} disabled={disabled} reset={() => book && setBook({ ...book })} />
+      <List book={book} disabled={disabled} onAdd={add} onCheck={check} onEdit={edit} onRemove={remove} />
       {errorSnackbar}
     </>
   )

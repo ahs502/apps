@@ -5,15 +5,18 @@ import { Alert } from '@material-ui/lab'
 export default function usePromiseHandler() {
   const [error, setError] = useState<string | null>(null)
 
-  async function handlePromise<T>(makePromise: () => Promise<T>, defaultValue: T, makeErrorMessage?: (reason: any) => string): Promise<T> {
+  async function handlePromise<T>(
+    makePromise: () => Promise<T>,
+    makeErrorMessage?: (reason: any) => string
+  ): Promise<{ success: true; result: T } | { success: false }> {
     try {
       const result = await makePromise()
       setError(null)
-      return result
+      return { success: true, result }
     } catch (reason) {
       console.error(reason)
       setError(makeErrorMessage ? makeErrorMessage(reason) : String(reason))
-      return defaultValue
+      return { success: false }
     }
   }
 
