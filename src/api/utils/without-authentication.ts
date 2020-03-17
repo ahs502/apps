@@ -5,7 +5,7 @@ export default function withoutAuthentication(
 ): (req: Request, res: Response, next: NextFunction) => Promise<void> {
   return async (req, res, next) => {
     try {
-      handle(req, res, next)
+      await handle(req, res, next)
     } catch (reason) {
       console.error(reason)
       res

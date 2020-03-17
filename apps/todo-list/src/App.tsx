@@ -18,8 +18,7 @@ function App() {
   const { handlePromise, errorSnackbar } = usePromiseHandler()
 
   const disabled = !!status
-
-  console.log('book =', book) //TODO: Remove this line later.
+  const bookTimestamp = book ? book.timestamp : 0
 
   async function refresh() {
     const response = await handlePromise(readBook)
@@ -27,21 +26,21 @@ function App() {
   }
   async function add(title: string, append: boolean): Promise<boolean> {
     const position = append ? undefined : 0
-    const response = await handlePromise(() => addTodo(title, position))
+    const response = await handlePromise(() => addTodo(bookTimestamp, title, position))
     response.success && setBook(response.result)
     return response.success
   }
   async function check(id: number, checked: boolean) {
-    const response = await handlePromise(() => editTodoChecked(id, checked))
+    const response = await handlePromise(() => editTodoChecked(bookTimestamp, id, checked))
     response.success && setBook(response.result)
   }
   async function edit(id: number, title: string): Promise<boolean> {
-    const response = await handlePromise(() => editTodoTitle(id, title))
+    const response = await handlePromise(() => editTodoTitle(bookTimestamp, id, title))
     response.success && setBook(response.result)
     return response.success
   }
   async function remove(id: number) {
-    const response = await handlePromise(() => removeTodo(id))
+    const response = await handlePromise(() => removeTodo(bookTimestamp, id))
     response.success && setBook(response.result)
   }
 

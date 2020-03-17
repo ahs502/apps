@@ -25,7 +25,9 @@ export default function Item({ item, index, disabled, onCheck, onEdit, onRemove 
       <ClickAwayListener onClickAway={event => setEditMode(false)}>
         <Paper elevation={6}>
           <Box padding={2} display="flex" alignItems="center">
-            <Box marginRight={7} />
+            <Box marginRight={2}>
+              <Checkbox color="secondary" checked={!!item.checked} disabled={true} />
+            </Box>
             <TextField
               fullWidth
               disabled={disabled}

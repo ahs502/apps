@@ -31,10 +31,10 @@ router.get(
 router.post(
   '/book/todo',
   withAuthentication('todo-list', async (req, res, next, scope) => {
-    const { title, position } = req.body || {}
+    const { bookTimestamp, title, position } = req.body || {}
     const name = getBookName(scope)
 
-    const { idBase, ...bookData } = await addTodo(name, title, position)
+    const { idBase, ...bookData } = await addTodo(name, bookTimestamp, title, position)
     const namedBookData: NamedBookData = { name, ...bookData }
 
     res
@@ -47,10 +47,10 @@ router.post(
 router.delete(
   '/book/todo',
   withAuthentication('todo-list', async (req, res, next, scope) => {
-    const { id } = req.body || {}
+    const { bookTimestamp, id } = req.body || {}
     const name = getBookName(scope)
 
-    const { idBase, ...bookData } = await removeTodo(name, id)
+    const { idBase, ...bookData } = await removeTodo(name, bookTimestamp, id)
     const namedBookData: NamedBookData = { name, ...bookData }
 
     res
@@ -63,10 +63,10 @@ router.delete(
 router.put(
   '/book/todo',
   withAuthentication('todo-list', async (req, res, next, scope) => {
-    const { id, title, checked, position } = req.body || {}
+    const { bookTimestamp, id, title, checked, position } = req.body || {}
     const name = getBookName(scope)
 
-    const { idBase, ...bookData } = await editTodo(name, id, title, checked, position)
+    const { idBase, ...bookData } = await editTodo(name, bookTimestamp, id, title, checked, position)
     const namedBookData: NamedBookData = { name, ...bookData }
 
     res

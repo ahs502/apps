@@ -20,24 +20,30 @@ export default function useBookApi() {
   async function readBook(): Promise<Book> {
     return await makeRequest('reading book', apiRequest('GET', `todo-list/book`))
   }
-  async function addTodo(title: string, position?: number): Promise<Book> {
-    return await makeRequest('adding todo', apiRequest('POST', `todo-list/book/todo`, { title, position }))
+  async function addTodo(bookTimestamp: number, title: string, position?: number): Promise<Book> {
+    return await makeRequest('adding todo', apiRequest('POST', `todo-list/book/todo`, { bookTimestamp, title, position }))
   }
-  async function removeTodo(id: number): Promise<Book> {
-    return await makeRequest('removing todo', apiRequest('DELETE', `todo-list/book/todo`, { id }))
+  async function removeTodo(bookTimestamp: number, id: number): Promise<Book> {
+    return await makeRequest('removing todo', apiRequest('DELETE', `todo-list/book/todo`, { bookTimestamp, id }))
   }
-  async function editTodo(id: number, title: string | undefined, checked: boolean | undefined, position: number | undefined): Promise<Book> {
-    return await makeRequest('editing todo', apiRequest('PUT', `todo-list/book/todo`, { id, title, checked, position }))
+  async function editTodo(
+    bookTimestamp: number,
+    id: number,
+    title: string | undefined,
+    checked: boolean | undefined,
+    position: number | undefined
+  ): Promise<Book> {
+    return await makeRequest('editing todo', apiRequest('PUT', `todo-list/book/todo`, { bookTimestamp, id, title, checked, position }))
   }
 
-  async function editTodoTitle(id: number, title: string) {
-    return await editTodo(id, title, undefined, undefined)
+  async function editTodoTitle(bookTimestamp: number, id: number, title: string) {
+    return await editTodo(bookTimestamp, id, title, undefined, undefined)
   }
-  async function editTodoChecked(id: number, checked: boolean) {
-    return await editTodo(id, undefined, checked, undefined)
+  async function editTodoChecked(bookTimestamp: number, id: number, checked: boolean) {
+    return await editTodo(bookTimestamp, id, undefined, checked, undefined)
   }
-  async function editTodoPosition(id: number, position: number) {
-    return await editTodo(id, undefined, undefined, position)
+  async function editTodoPosition(bookTimestamp: number, id: number, position: number) {
+    return await editTodo(bookTimestamp, id, undefined, undefined, position)
   }
 
   async function makeRequest(status: Status, response: Promise<Book>): Promise<Book> {

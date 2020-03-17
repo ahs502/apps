@@ -21,7 +21,7 @@ export default function withAuthentication(
       }
 
       const scope = verificationResult.scope
-      handle(req, res, next, scope)
+      await handle(req, res, next, scope)
     } catch (reason) {
       console.error(reason)
       res

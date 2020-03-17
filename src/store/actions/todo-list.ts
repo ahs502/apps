@@ -38,11 +38,13 @@ export async function writeTodoBook(bookName: string, book: Book): Promise<void>
 /**
  * Inserts a new todo to a todo book and returns the new todo book.
  * @param bookName Book name
+ * @param bookTimestamp Book timestamp in the client
  * @param title Todo title
  * @param position Todo position, default is the end of the list
  */
-export async function addTodo(bookName: string, title: string, position?: number): Promise<Book> {
+export async function addTodo(bookName: string, bookTimestamp: number, title: string, position?: number): Promise<Book> {
   const oldBook = await readTodoBook(bookName)
+  if (oldBook.timestamp > bookTimestamp) throw new Error('Your list is outdated, please refresh.')
   const newTodo: Todo = {
     id: oldBook.idBase,
     title
@@ -60,10 +62,12 @@ export async function addTodo(bookName: string, title: string, position?: number
 /**
  * Removes a todo from a todo book if exists and returns the new todo book.
  * @param bookName Book name
+ * @param bookTimestamp Book timestamp in the client
  * @param id Todo ID
  */
-export async function removeTodo(bookName: string, id: number): Promise<Book> {
+export async function removeTodo(bookName: string, bookTimestamp: number, id: number): Promise<Book> {
   const oldBook = await readTodoBook(bookName)
+  if (oldBook.timestamp > bookTimestamp) throw new Error('Your list is outdated, please refresh.')
   const todoIndex = oldBook.list.findIndex(todo => todo.id === id)
   if (todoIndex < 0) return oldBook
   const newBook: Book = {
@@ -79,6 +83,7 @@ export async function removeTodo(bookName: string, id: number): Promise<Book> {
 /**
  * Updates a todo from a todo book if exists and returns the new todo book.
  * @param bookName Book name
+ * @param bookTimestamp Book timestamp in the client
  * @param id Todo ID
  * @param title New todo title, set undefined to not to change
  * @param checked New todo checked, set undefined to not to change
@@ -86,12 +91,14 @@ export async function removeTodo(bookName: string, id: number): Promise<Book> {
  */
 export async function editTodo(
   bookName: string,
+  bookTimestamp: number,
   id: number,
   title: string | undefined,
   checked: boolean | undefined,
   position: number | undefined
 ): Promise<Book> {
   const oldBook = await readTodoBook(bookName)
+  if (oldBook.timestamp > bookTimestamp) throw new Error('Your list is outdated, please refresh.')
   const todoIndex = oldBook.list.findIndex(todo => todo.id === id)
   if (todoIndex < 0) return oldBook
   const oldTodo = oldBook.list[todoIndex]
