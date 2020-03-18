@@ -27,6 +27,7 @@ router.get(
 
     res
       .status(200)
+      .header('Content-Type', 'application/javascript; charset=UTF-8')
       .send(configurer)
       .end()
   })
