@@ -43,6 +43,11 @@ function App() {
     const response = await handlePromise(() => removeTodo(bookTimestamp, id))
     response.success && setBook(response.result)
   }
+  async function reorder(id: number, position: number): Promise<boolean> {
+    const response = await handlePromise(() => editTodoPosition(bookTimestamp, id, position))
+    response.success && setBook(response.result)
+    return response.success
+  }
 
   useEffect(() => {
     refresh()
@@ -53,7 +58,7 @@ function App() {
   return (
     <>
       <Header book={book} disabled={disabled} onRefresh={refresh} />
-      <List book={book} disabled={disabled} onAdd={add} onCheck={check} onEdit={edit} onRemove={remove} />
+      <List book={book} disabled={disabled} onAdd={add} onCheck={check} onEdit={edit} onRemove={remove} onReorder={reorder} />
       {errorSnackbar}
     </>
   )

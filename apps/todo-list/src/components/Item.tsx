@@ -5,13 +5,14 @@ import { Edit as EditIcon, Close as CloseIcon, Check as CheckIcon } from '@mater
 interface Props {
   item: Book['list'][number]
   index: number
+  dragging?: boolean
   disabled?: boolean
   onCheck?(checked: boolean): void
   onEdit?(title: string): Promise<boolean>
   onRemove?(): void
 }
 
-export default function Item({ item, index, disabled, onCheck, onEdit, onRemove }: Props) {
+export default function Item({ item, index, dragging, disabled, onCheck, onEdit, onRemove }: Props) {
   const [editMode, setEditMode] = useState(false)
   const [editedTitle, setEditedTitle] = useState('')
 
