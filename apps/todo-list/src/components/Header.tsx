@@ -1,7 +1,7 @@
 import React from 'react'
 import { Theme, AppBar, Toolbar, Typography, Box, IconButton, Button } from '@material-ui/core'
 import { useTheme } from '@material-ui/styles'
-import { Cached as CachedIcon, ExitToApp as ExitIcon } from '@material-ui/icons'
+import { Cached as CachedIcon, Close as ExitIcon } from '@material-ui/icons'
 
 import { logout } from '../../../core/auth'
 
@@ -20,7 +20,7 @@ export default function Header({ book, disabled, onRefresh }: Props) {
         <IconButton color="inherit" disabled={disabled} onClick={() => logout()}>
           <ExitIcon />
         </IconButton>
-        <Box marginX={2}>
+        <Box marginLeft={1} marginRight={2}>
           <Typography variant="h6" noWrap>
             Todo List
           </Typography>

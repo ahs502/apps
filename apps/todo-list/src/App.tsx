@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Theme, Typography, Box, Button } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
 
 import useBookApi from './utils/use-book-api'
+import usePromiseHandler from './utils/use-promise-handler'
 
 import Header from './components/Header'
-import usePromiseHandler from './utils/use-promise-handler'
 import List from './components/List'
-
-const useStyles = makeStyles((theme: Theme) => ({
-  //...
-}))
 
 function App() {
   const [book, setBook] = useState<Book | null>(null)
@@ -52,8 +46,6 @@ function App() {
   useEffect(() => {
     refresh()
   }, [])
-
-  const classes = useStyles()
 
   return (
     <>

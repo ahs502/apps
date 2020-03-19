@@ -1,22 +1,6 @@
 {
   "version": 1,
-  "timestamp": 1584547325897,
-  "idBase": 12,
-  "list": [
-    {
-      "id": 10,
-      "title": "ggdfgdfsgsdgfg",
-      "checked": true
-    },
-    {
-      "id": 11,
-      "title": "4578347587458275823745842375823745",
-      "checked": true
-    },
-    {
-      "id": 9,
-      "title": "sklfjskldajfasdf",
-      "checked": false
-    }
-  ]
+  "timestamp": 1584603443446,
+  "idBase": 35,
+  "list": []
 }

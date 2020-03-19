@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
-import { Box, Paper, Typography, Checkbox, IconButton, ClickAwayListener, TextField } from '@material-ui/core'
+import { Box, Paper, Typography, Checkbox, IconButton, ClickAwayListener, TextField, Theme } from '@material-ui/core'
+import { useTheme } from '@material-ui/styles'
 import { Edit as EditIcon, Close as CloseIcon, Check as CheckIcon } from '@material-ui/icons'
+
+import isRtl from '../utils/is-rtl'
 
 interface Props {
   item: Book['list'][number]
@@ -15,11 +18,14 @@ interface Props {
 export default function Item({ item, index, dragging, disabled, onCheck, onEdit, onRemove }: Props) {
   const [editMode, setEditMode] = useState(false)
   const [editedTitle, setEditedTitle] = useState('')
+  const theme = useTheme<Theme>()
 
   async function apply() {
     const done = await onEdit?.(editedTitle)
     setEditMode(!done)
   }
+
+  const rtl = isRtl(editedTitle)
 
   if (editMode)
     return (
@@ -31,6 +37,15 @@ export default function Item({ item, index, dragging, disabled, onCheck, onEdit,
             </Box>
             <TextField
               fullWidth
+              variant="outlined"
+              inputProps={{
+                style: {
+                  fontSize: theme.spacing(3),
+                  height: theme.spacing(2),
+                  textAlign: rtl ? 'right' : 'left',
+                  direction: rtl ? 'rtl' : 'ltr'
+                }
+              }}
               disabled={disabled}
               label="Todo Text"
               placeholder="Write the todo text here..."
@@ -38,7 +53,6 @@ export default function Item({ item, index, dragging, disabled, onCheck, onEdit,
               onChange={({ target: { value } }) => setEditedTitle(value)}
               onKeyDown={event => event.keyCode === 13 && apply()}
             />
-            <Box flexGrow={1} />
             <Box marginRight={1} marginLeft={2}>
               <IconButton disabled={disabled} title="Apply" onClick={() => apply()}>
                 <CheckIcon />
@@ -58,8 +72,17 @@ export default function Item({ item, index, dragging, disabled, onCheck, onEdit,
         <Box marginRight={2}>
           <Checkbox color="secondary" checked={!!item.checked} disabled={disabled} onChange={(event, checked) => onCheck?.(checked)} />
         </Box>
-        <Typography variant="subtitle1">{item.title}</Typography>
-        <Box flexGrow={1} />
+        <Typography
+          variant="subtitle1"
+          align="center"
+          style={{
+            flexGrow: 1,
+            fontSize: theme.spacing(3),
+            lineHeight: `calc(${theme.spacing(6)}px + 5px)`
+          }}
+        >
+          {item.title}
+        </Typography>
         <Box marginRight={1} marginLeft={2}>
           <IconButton
             disabled={disabled}

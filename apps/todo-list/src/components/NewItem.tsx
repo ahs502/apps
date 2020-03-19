@@ -3,6 +3,8 @@ import { Paper, Box, TextField, IconButton, Theme } from '@material-ui/core'
 import { useTheme } from '@material-ui/styles'
 import { ClearAll as ClearAllIcon, Add as AddIcon, ArrowDropDown as ArrowDropDownIcon } from '@material-ui/icons'
 
+import isRtl from '../utils/is-rtl'
+
 interface Props {
   disabled?: boolean
   onAdd?(title: string): Promise<boolean>
@@ -27,6 +29,8 @@ export default function NewItem({ disabled, onAdd }: Props) {
     inputRef.current?.focus?.() //TODO: Not working.
   }
 
+  const rtl = isRtl(title)
+
   return (
     <Paper variant="outlined" square>
       <Box padding={2} display="flex" alignItems="center" style={{ backgroundColor: theme.palette.background.default }}>
@@ -44,6 +48,15 @@ export default function NewItem({ disabled, onAdd }: Props) {
         <TextField
           innerRef={inputRef}
           fullWidth
+          variant="outlined"
+          inputProps={{
+            style: {
+              fontSize: theme.spacing(3),
+              height: theme.spacing(2),
+              textAlign: rtl ? 'right' : 'left',
+              direction: rtl ? 'rtl' : 'ltr'
+            }
+          }}
           disabled={disabled}
           label="New Todo"
           placeholder="Write the todo text here..."
@@ -51,7 +64,6 @@ export default function NewItem({ disabled, onAdd }: Props) {
           onChange={({ target: { value } }) => setTitle(value)}
           onKeyDown={event => event.keyCode === 13 && add()}
         />
-        <Box flexGrow={1} />
         <Box marginRight={1} marginLeft={2}>
           <IconButton disabled={disabled || !title} title="Add" onClick={() => add()}>
             <AddIcon />

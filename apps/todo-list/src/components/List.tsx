@@ -27,8 +27,11 @@ export default function List({ book, disabled, onAdd, onCheck, onEdit, onRemove,
     if (!result.destination || !book || !onReorder || disabled) return
 
     const oldIndex = result.source.index
-    const itemId = viewBook?.list?.[oldIndex]?.id!
     const newIndex = result.destination.index
+
+    if (oldIndex === newIndex) return
+
+    const itemId = viewBook?.list?.[oldIndex]?.id!
 
     const newList = [...book.list]
     const item = newList.splice(oldIndex, 1)[0]
@@ -48,13 +51,13 @@ export default function List({ book, disabled, onAdd, onCheck, onEdit, onRemove,
   if (!viewBook) return null
 
   return (
-    <Box marginTop={10}>
+    <Box marginTop={10} marginBottom={4}>
       <Container maxWidth="md">
         {viewBook.list.length === 0 ? (
           <Box paddingTop={2} paddingBottom={4}>
             <Typography variant="body1">There is no items in the list!</Typography>
             <Typography variant="subtitle1" color="secondary">
-              Start by adding a <strong>new</strong> todo.
+              Start by adding a <strong>new todo</strong>.
             </Typography>
           </Box>
         ) : (
