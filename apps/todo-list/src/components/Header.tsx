@@ -17,7 +17,7 @@ export default function Header({ book, disabled, onRefresh }: Props) {
   return (
     <AppBar position="absolute">
       <Toolbar>
-        <IconButton color="inherit" disabled={disabled} onClick={() => logout()}>
+        <IconButton color="inherit" title="Close this list" disabled={disabled} onClick={() => logout()}>
           <ExitIcon />
         </IconButton>
         <Box marginLeft={1} marginRight={2}>
@@ -26,13 +26,13 @@ export default function Header({ book, disabled, onRefresh }: Props) {
           </Typography>
         </Box>
         {book && (
-          <Typography variant="subtitle2" noWrap>
+          <Typography variant="subtitle2" noWrap title="Todo list name">
             {book.name}
           </Typography>
         )}
         <Box flexGrow={1} />
         <Box flexGrow={0} flexShrink={0} marginLeft={2}>
-          <Button variant="outlined" color="inherit" endIcon={<CachedIcon />} disabled={disabled} onClick={onRefresh}>
+          <Button variant="outlined" color="inherit" endIcon={<CachedIcon />} title="Refresh to the latest list" disabled={disabled} onClick={onRefresh}>
             Refresh&nbsp;&nbsp;
           </Button>
         </Box>
