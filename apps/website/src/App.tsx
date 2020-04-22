@@ -14,13 +14,24 @@ export default function App() {
         <Box padding={5} textAlign="center">
           <img src="under-construction.png" alt="Website is under construction." />
         </Box>
-        <a href="/todo-list" target="_blank" rel="noopener noreferrer">
-          <Paper>
-            <Box padding={2}>
-              <Typography variant="subtitle1">Todo List</Typography>
-            </Box>
-          </Paper>
-        </a>
+        <Box marginBottom={2}>
+          <a href="/todo-list" target="_blank" rel="noopener noreferrer">
+            <Paper>
+              <Box padding={2}>
+                <Typography variant="subtitle1">Todo List</Typography>
+              </Box>
+            </Paper>
+          </a>
+        </Box>
+        <Box marginBottom={2}>
+          <a href="/validation" target="_blank" rel="noopener noreferrer">
+            <Paper>
+              <Box padding={2}>
+                <Typography variant="subtitle1">Validation Docs</Typography>
+              </Box>
+            </Paper>
+          </a>
+        </Box>
       </Container>
     </>
   )

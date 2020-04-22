@@ -8,15 +8,17 @@
   "scripts": {
     "start": "ts-node ./src/server.ts",
     "start:dev": "cross-env PORT=4000 RELATIVE_STORAGE_PATH=data-dev ENV=development npm start",
-    "install:all": "npm install && npm install --prefix apps/website && npm install --prefix apps/todo-list",
+    "install:all": "npm install && npm install --prefix apps/website && npm install --prefix apps/todo-list && npm install --prefix apps/validation",
     "develop": "nodemon --watch src --ext ts,js,json --verbose --exec \"npm run start:dev\"",
     "develop:website": "concurrently -k -p \"[{index}] [{time}] [{name}]\" -n \"Server,Client\" -c \"blue,green\" \"npm run develop\" \"npm start --prefix apps/website\"",
     "develop:todo-list": "concurrently -k -p \"[{index}] [{time}] [{name}]\" -n \"Server,Client\" -c \"blue,green\" \"npm run develop\" \"npm start --prefix apps/todo-list\"",
+    "develop:validation": "concurrently -k -p \"[{index}] [{time}] [{name}]\" -n \"Server,Client\" -c \"blue,green\" \"npm run develop\" \"npm start --prefix apps/validation\"",
     "updates:check": "ncu",
     "updates:install": "ncu -u && npm install",
-    "build": "npm run build:website && npm run build:todo-list",
+    "build": "npm run build:website && npm run build:todo-list && npm run build:validation",
     "build:website": "del-cli \"public/website\" && npm run --prefix apps/website build && mkdir public/website && cp -a apps/website/build/* public/website && rm -rf apps/website/build",
     "build:todo-list": "del-cli \"public/todo-list\" && npm run --prefix apps/todo-list build && mkdir public/todo-list && cp -a apps/todo-list/build/* public/todo-list && rm -rf apps/todo-list/build",
+    "build:validation": "del-cli \"public/validation\" && npm run --prefix apps/validation build && mkdir public/validation && cp -a apps/validation/build/* public/validation && rm -rf apps/validation/build",
     "ts-node": "ts-node"
   },
   "dependencies": {
