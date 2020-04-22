@@ -1,14 +1,27 @@
 import React from 'react'
+import { AppBar, Toolbar, Typography, Container, Box, Paper } from '@material-ui/core'
 
 export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>AHS 502</p>
-        <a className="App-link" href="/todo-list" target="_blank" rel="noopener noreferrer">
-          Todo List
+    <>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6">Hessamoddin A Shokravi</Typography>
+        </Toolbar>
+      </AppBar>
+
+      <Container maxWidth="lg">
+        <Box padding={5} textAlign="center">
+          <img src="under-construction.png" alt="Website is under construction." />
+        </Box>
+        <a href="/todo-list" target="_blank" rel="noopener noreferrer">
+          <Paper>
+            <Box padding={2}>
+              <Typography variant="subtitle1">Todo List</Typography>
+            </Box>
+          </Paper>
         </a>
-      </header>
-    </div>
+      </Container>
+    </>
   )
 }
