@@ -6,7 +6,7 @@ import usePromiseHandler from './utils/use-promise-handler'
 import Header from './components/Header'
 import List from './components/List'
 
-function App() {
+export default function App() {
   const [book, setBook] = useState<Book | null>(null)
   const { status, readBook, addTodo, removeTodo, editTodoTitle, editTodoChecked, editTodoPosition } = useBookApi()
   const { handlePromise, errorSnackbar } = usePromiseHandler()
@@ -55,5 +55,3 @@ function App() {
     </>
   )
 }
-
-export default App

@@ -1,10 +1,6 @@
-declare interface Config {
-  readonly x: number
-}
+declare interface Config {}
 
-declare interface Persistant {
-  x: number
-}
+declare interface Persistant {}
 
 declare interface Book {
   readonly name: string
