@@ -1,8 +1,12 @@
 import React from 'react'
-import { AppBar, Toolbar, Typography, Box, Theme, Button } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Box, Theme, Button, IconButton, Hidden } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
+import { Menu as MenuIcon } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme: Theme) => ({
+  menu: {
+    marginRight: theme.spacing(2)
+  },
   icon: {
     width: theme.spacing(4),
     height: theme.spacing(4),
@@ -14,8 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexShrink: 0
   },
   npmLogo: {
-    height: theme.spacing(2),
-    marginRight: theme.spacing(1)
+    height: theme.spacing(2)
   }
 }))
 
@@ -25,7 +28,14 @@ export default function Header() {
   return (
     <AppBar position="static">
       <Toolbar>
-        <img className={classes.icon} src="favicon.png" alt="Validation" />
+        <Hidden lgUp implementation="css">
+          <IconButton className={classes.menu} color="inherit">
+            <MenuIcon />
+          </IconButton>
+        </Hidden>
+        <Hidden xsDown implementation="css">
+          <img className={classes.icon} src="favicon.png" alt="Validation" />
+        </Hidden>
         <Typography variant="h6" noWrap>
           Validation Documentation
         </Typography>
@@ -37,9 +47,14 @@ export default function Header() {
           size="small"
           href="https://www.npmjs.com/package/@ahs502/validation"
           target="_blank"
+          title="Visit the package in the NPM website"
         >
+          &nbsp;
           <img className={classes.npmLogo} src="npm-logo.png" alt="NPM" />
-          @ahs502/validation
+          &nbsp;
+          <Hidden smDown implementation="css">
+            &nbsp;&nbsp;@ahs502/validation
+          </Hidden>
         </Button>
       </Toolbar>
     </AppBar>
