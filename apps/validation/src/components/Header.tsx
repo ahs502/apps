@@ -38,7 +38,7 @@ export default function Header({ onSideMenuClick }: Props) {
           </IconButton>
         </Hidden>
         <Hidden xsDown implementation="css">
-          <img className={classes.icon} src="favicon.png" alt="Validation" />
+          <img className={classes.icon} src="/favicon.png" alt="Validation" />
         </Hidden>
         <Typography variant="h6" noWrap>
           Validation Documentation
@@ -54,7 +54,7 @@ export default function Header({ onSideMenuClick }: Props) {
           title="Visit the package in the NPM website"
         >
           &nbsp;
-          <img className={classes.npmLogo} src="npm-logo.png" alt="NPM" />
+          <img className={classes.npmLogo} src="/npm-logo.png" alt="NPM" />
           &nbsp;
           <Hidden smDown implementation="css">
             &nbsp;&nbsp;@ahs502/validation
