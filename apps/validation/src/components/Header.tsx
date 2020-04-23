@@ -22,14 +22,18 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }))
 
-export default function Header() {
+interface Props {
+  onSideMenuClick?(): void
+}
+
+export default function Header({ onSideMenuClick }: Props) {
   const classes = useStyles()
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Toolbar>
         <Hidden lgUp implementation="css">
-          <IconButton className={classes.menu} color="inherit">
+          <IconButton className={classes.menu} color="inherit" onClick={onSideMenuClick}>
             <MenuIcon />
           </IconButton>
         </Hidden>
