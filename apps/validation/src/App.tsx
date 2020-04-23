@@ -16,7 +16,7 @@ export default function App() {
 
       {/* Fixed side menu for wider displays */}
       <Hidden mdDown>
-        <Box position="fixed" top={theme.spacing(8)} bottom={0} left={0} width={theme.spacing(25)} overflow="auto">
+        <Box position="fixed" top={theme.spacing(8)} bottom={0} left={0} overflow="auto">
           <SideMenu onClose={() => setSideMenuOpen(false)} />
         </Box>
       </Hidden>
@@ -24,9 +24,7 @@ export default function App() {
       {/* Drawer side menu for smaller displays */}
       <Hidden lgUp>
         <Drawer anchor="left" open={sideMenuOpen} onClose={() => setSideMenuOpen(false)}>
-          <Box width={theme.spacing(25)}>
-            <SideMenu onClose={() => setSideMenuOpen(false)} />
-          </Box>
+          <SideMenu onClose={() => setSideMenuOpen(false)} />
         </Drawer>
       </Hidden>
 
