@@ -27,6 +27,7 @@ export default function SideMenu({ onClick }: Props) {
             <ListItem
               key={item.code}
               button
+              selected={item.code === section?.code && !item.content?.some(({ code }) => code === subSection?.code)}
               onClick={() => {
                 history.push(intractPathname(`/${item.code}`))
                 onClick?.()
@@ -44,6 +45,9 @@ export default function SideMenu({ onClick }: Props) {
                 key={`${item.code}/${subItem.code}`}
                 button
                 dense
+                selected={
+                  item.code === section?.code && subItem.code === subSection?.code && !subItem.content?.some(({ code }) => code === subSubSection?.code)
+                }
                 onClick={() => {
                   history.push(intractPathname(`/${item.code}/${subItem.code}`))
                   onClick?.()
@@ -69,6 +73,7 @@ export default function SideMenu({ onClick }: Props) {
                   key={`${item.code}/${subItem.code}/${subSubItem.code}`}
                   button
                   dense
+                  selected={item.code === section?.code && subItem.code === subSection?.code && subSubItem.code === subSubSection?.code}
                   onClick={() => {
                     history.push(intractPathname(`/${item.code}/${subItem.code}/${subSubItem.code}`))
                     onClick?.()

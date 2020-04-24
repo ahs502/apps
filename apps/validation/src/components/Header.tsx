@@ -30,7 +30,7 @@ export default function Header({ onSideMenuClick }: Props) {
   const classes = useStyles()
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="fixed">
       <Toolbar>
         <Hidden lgUp implementation="css">
           <IconButton className={classes.menu} color="inherit" onClick={onSideMenuClick}>

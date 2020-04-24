@@ -1,11 +1,13 @@
-import React from 'react'
-import { Paper, Box } from '@material-ui/core'
+import React, { useEffect } from 'react'
+import { Box, Theme } from '@material-ui/core'
+import { useTheme } from '@material-ui/styles'
 import ReactMarkdown from 'react-markdown'
 
 import content from '../content'
 import useSections from '../utils/use-sections'
 
 export default function Content() {
+  const theme = useTheme<Theme>()
   const sections = useSections()
 
   function flattenMarkdowns(section: typeof content[number], parentKey: string = ''): { key: string; markdown: string }[] {
@@ -19,11 +21,28 @@ export default function Content() {
   }
   const markdowns = flattenMarkdowns(sections[0])
 
+  const intendedKey = '/' + sections.map(({ code }) => code).join('/')
+  useEffect(() => {
+    if (intendedKey === markdowns[0].key) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      const element = window.document.getElementById(intendedKey)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+  }, [intendedKey])
+
   return (
     <>
       {markdowns.map(({ key, markdown }) => (
-        <ReactMarkdown key={key} source={markdown} />
+        <Box id={key} paddingTop={2}>
+          <Box position="relative" top={theme.spacing(8)}>
+            <ReactMarkdown key={key} source={markdown} />
+          </Box>
+        </Box>
       ))}
+      <Box marginBottom={16} />
     </>
   )
 }

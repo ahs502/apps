@@ -14,6 +14,6 @@ export function extractPathname(locationPathname: string): string {
  */
 export function intractPathname(realPathname: string): string {
   const appPrefix = `/${config.app}`
-  if (config.env !== 'development') return `${appPrefix}/${realPathname}`
+  if (config.env !== 'development') return `${appPrefix}/${realPathname.startsWith('/') ? realPathname.slice(1) : realPathname}`
   return realPathname
 }
