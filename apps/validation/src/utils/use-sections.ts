@@ -2,11 +2,10 @@ import content, { Section, Content } from '../content'
 import { useLocation, useHistory } from 'react-router-dom'
 
 export default function useSections(): Section[] {
-  console.log('content', content)
   const location = useLocation()
   const history = useHistory()
 
-  const codes = location.pathname.split('/').slice(1)
+  const codes = location.pathname.split('/').slice(1).filter(Boolean)
   let pathname = codes[0] === config.app ? `/${codes.shift()}` : ''
   if (codes.length === 0) {
     const defaultSection = content[0]
