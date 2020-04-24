@@ -22,79 +22,82 @@ export default function SideMenu({ onClick }: Props) {
   return (
     <Box minWidth={theme.spacing(30)}>
       <Paper square variant="outlined">
-        <List>
-          {content.flatMap(item => [
-            <ListItem
-              key={item.code}
-              button
-              selected={item.code === section?.code && !item.content?.some(({ code }) => code === subSection?.code)}
-              onClick={() => {
-                history.push(intractPathname(`/${item.code}`))
-                onClick?.()
-              }}
-            >
-              <Typography
-                variant="h5"
-                color={item.code !== section?.code ? 'initial' : item.content?.some(({ code }) => code === subSection?.code) ? 'primary' : 'secondary'}
-              >
-                {item.label}
-              </Typography>
-            </ListItem>,
-            ...(item.content || []).flatMap(subItem => [
+        <Box paddingY={2}>
+          <List>
+            {content.flatMap(item => [
               <ListItem
-                key={`${item.code}/${subItem.code}`}
+                key={item.code}
                 button
-                dense
-                selected={
-                  item.code === section?.code && subItem.code === subSection?.code && !subItem.content?.some(({ code }) => code === subSubSection?.code)
-                }
+                selected={item.code === section?.code && !item.content?.some(({ code }) => code === subSection?.code)}
                 onClick={() => {
-                  history.push(intractPathname(`/${item.code}/${subItem.code}`))
+                  history.push(intractPathname(`/${item.code}`))
                   onClick?.()
                 }}
               >
-                <Box paddingLeft={4}>
-                  <Typography
-                    variant="h6"
-                    color={
-                      item.code !== section?.code || subItem.code !== subSection?.code
-                        ? 'initial'
-                        : subItem.content?.some(({ code }) => code === subSubSection?.code)
-                        ? 'primary'
-                        : 'secondary'
-                    }
-                  >
-                    {subItem.label}
-                  </Typography>
-                </Box>
+                <Typography
+                  variant="h5"
+                  color={item.code !== section?.code ? 'initial' : item.content?.some(({ code }) => code === subSection?.code) ? 'primary' : 'secondary'}
+                >
+                  {item.label}
+                </Typography>
               </ListItem>,
-              ...(subItem.content || []).map(subSubItem => (
+              ...(item.content || []).flatMap(subItem => [
                 <ListItem
-                  key={`${item.code}/${subItem.code}/${subSubItem.code}`}
+                  key={`${item.code}/${subItem.code}`}
                   button
                   dense
-                  selected={item.code === section?.code && subItem.code === subSection?.code && subSubItem.code === subSubSection?.code}
+                  selected={
+                    item.code === section?.code && subItem.code === subSection?.code && !subItem.content?.some(({ code }) => code === subSubSection?.code)
+                  }
                   onClick={() => {
-                    history.push(intractPathname(`/${item.code}/${subItem.code}/${subSubItem.code}`))
+                    history.push(intractPathname(`/${item.code}/${subItem.code}`))
                     onClick?.()
                   }}
                 >
-                  <Box paddingLeft={8}>
+                  <Box paddingLeft={4}>
                     <Typography
-                      variant="subtitle1"
+                      variant="h6"
                       color={
-                        item.code !== section?.code || subItem.code !== subSection?.code || subSubItem.code !== subSubSection?.code ? 'initial' : 'secondary'
+                        item.code !== section?.code || subItem.code !== subSection?.code
+                          ? 'initial'
+                          : subItem.content?.some(({ code }) => code === subSubSection?.code)
+                          ? 'primary'
+                          : 'secondary'
                       }
                     >
-                      {subSubItem.label}
+                      {subItem.label}
                     </Typography>
                   </Box>
-                </ListItem>
-              ))
-            ]),
-            item !== content[content.length - 1] && <Divider key={`${item.code} separator`} />
-          ])}
-        </List>
+                </ListItem>,
+                ...(subItem.content || []).map(subSubItem => (
+                  <ListItem
+                    key={`${item.code}/${subItem.code}/${subSubItem.code}`}
+                    button
+                    dense
+                    selected={item.code === section?.code && subItem.code === subSection?.code && subSubItem.code === subSubSection?.code}
+                    onClick={() => {
+                      history.push(intractPathname(`/${item.code}/${subItem.code}/${subSubItem.code}`))
+                      onClick?.()
+                    }}
+                  >
+                    <Box paddingLeft={8}>
+                      <Typography
+                        variant="subtitle1"
+                        color={
+                          item.code !== section?.code || subItem.code !== subSection?.code || subSubItem.code !== subSubSection?.code ? 'initial' : 'secondary'
+                        }
+                      >
+                        {subSubItem.label}
+                      </Typography>
+                    </Box>
+                  </ListItem>
+                )),
+                item.content && subItem !== item.content[item.content.length - 1] && <Box key={`${item.code}/${subItem.code} separator`} marginBottom={1} />
+              ]),
+              item !== content[content.length - 1] && <Box key={`${item.code} separator`} marginBottom={2} />
+            ])}
+          </List>
+        </Box>
       </Paper>
     </Box>
   )

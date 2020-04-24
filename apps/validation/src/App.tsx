@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import Header from './components/Header'
 import SideMenu from './components/SideMenu'
 import Content from './components/Content'
+import MiniHeader from './components/MiniHeader'
 
 export default function App() {
   const [sideMenuOpen, setSideMenuOpen] = useState(false)
@@ -26,6 +27,7 @@ export default function App() {
         {/* Drawer side menu for smaller displays */}
         <Hidden lgUp>
           <Drawer anchor="left" open={sideMenuOpen} onClose={() => setSideMenuOpen(false)}>
+            <MiniHeader onClose={() => setSideMenuOpen(false)} />
             <SideMenu onClick={() => setSideMenuOpen(false)} />
           </Drawer>
         </Hidden>

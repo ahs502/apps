@@ -3,15 +3,11 @@ import { AppBar, Toolbar, Typography, Box, Theme, Button, IconButton, Hidden } f
 import { makeStyles } from '@material-ui/styles'
 import { Menu as MenuIcon } from '@material-ui/icons'
 
+import Icon from './Icon'
+
 const useStyles = makeStyles((theme: Theme) => ({
   menu: {
     marginRight: theme.spacing(2)
-  },
-  icon: {
-    width: theme.spacing(4),
-    height: theme.spacing(4),
-    marginRight: theme.spacing(3),
-    flexShrink: 0
   },
   npmLink: {
     textTransform: 'none',
@@ -37,11 +33,11 @@ export default function Header({ onSideMenuClick }: Props) {
             <MenuIcon />
           </IconButton>
         </Hidden>
-        <Hidden xsDown implementation="css">
-          <img className={classes.icon} src="/favicon.png" alt="Validation" />
-        </Hidden>
+        <Icon />
         <Typography variant="h6" noWrap>
-          Validation Documentation
+          Validation&nbsp;
+          <Hidden xsDown>Documentation</Hidden>
+          <Hidden smUp>Docs</Hidden>
         </Typography>
         <Box flexGrow={1} marginRight={2} />
         <Button
