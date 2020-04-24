@@ -2,6 +2,7 @@ import content, { Section, Content } from '../content'
 import { useLocation, useHistory } from 'react-router-dom'
 
 export default function useSections(): Section[] {
+  console.log('content', content)
   const location = useLocation()
   const history = useHistory()
 

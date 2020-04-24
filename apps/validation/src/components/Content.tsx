@@ -7,6 +7,7 @@ import useSections from '../utils/use-sections'
 
 export default function Content() {
   const sections = useSections()
+  console.log('sections', sections)
 
   function flattenMarkdowns(section: typeof content[number], parentKey: string = ''): { key: string; markdown: string }[] {
     return [
