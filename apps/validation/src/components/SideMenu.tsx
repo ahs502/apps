@@ -5,6 +5,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 
 import content from '../content'
 import useSections from '../utils/use-sections'
+import { intractPathname } from '../../../core/location'
 
 interface Props {
   onClick?(): void
@@ -16,7 +17,6 @@ export default function SideMenu({ onClick }: Props) {
   const location = useLocation()
   const history = useHistory()
 
-  const absolutePathname = location.pathname.startsWith(`/${config.app}/`) || location.pathname === `/${config.app}` ? `/${config.app}` : ''
   const [section, subSection, subSubSection] = useSections()
 
   return (
@@ -28,7 +28,7 @@ export default function SideMenu({ onClick }: Props) {
               key={item.code}
               button
               onClick={() => {
-                history.push(`${absolutePathname}/${item.code}`)
+                history.push(intractPathname(`/${item.code}`))
                 onClick?.()
               }}
             >
@@ -45,7 +45,7 @@ export default function SideMenu({ onClick }: Props) {
                 button
                 dense
                 onClick={() => {
-                  history.push(`${absolutePathname}/${item.code}/${subItem.code}`)
+                  history.push(intractPathname(`/${item.code}/${subItem.code}`))
                   onClick?.()
                 }}
               >
@@ -70,7 +70,7 @@ export default function SideMenu({ onClick }: Props) {
                   button
                   dense
                   onClick={() => {
-                    history.push(`${absolutePathname}/${item.code}/${subItem.code}/${subSubItem.code}`)
+                    history.push(intractPathname(`/${item.code}/${subItem.code}/${subSubItem.code}`))
                     onClick?.()
                   }}
                 >
