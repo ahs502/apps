@@ -9,14 +9,11 @@ export default function withAuthentication(
   return async (req, res, next) => {
     try {
       const authCode = req.header('auth-code')
-      const verificationResult = await verifyAuthCode(app, authCode, req.ip, req.headers['user-agent'])
+      const verificationResult = await verifyAuthCode(app, authCode, req.ip, req.headers['user-agent']!)
 
       if (!verificationResult.verified) {
         console.error('Unauthorized access (401):', verificationResult.reason)
-        res
-          .status(401)
-          .send(verificationResult.reason)
-          .end()
+        res.status(401).send(verificationResult.reason).end()
         return
       }
 
@@ -24,10 +21,7 @@ export default function withAuthentication(
       await handle(req, res, next, scope)
     } catch (reason) {
       console.error(reason)
-      res
-        .status(500)
-        .send(String(reason))
-        .end()
+      res.status(500).send(String(reason)).end()
     }
   }
 }

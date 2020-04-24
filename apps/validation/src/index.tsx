@@ -2,9 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { CssBaseline, ThemeProvider } from '@material-ui/core'
 
+import visitUp from './utils/visit-up'
 import theme from './theme'
 import App from './App'
 // import * as serviceWorker from './serviceWorker';
+
+visitUp()
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>

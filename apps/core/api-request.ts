@@ -8,7 +8,7 @@ export async function apiRequest<R = void>(method: 'GET' | 'POST' | 'DELETE' | '
       'auth-code': persistant['auth-code']!,
       'Content-Type': 'application/json'
     },
-    body: body ? JSON.stringify(body) : undefined
+    body: JSON.stringify(body)
   })
 
   if (response.status === 401) {

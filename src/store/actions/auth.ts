@@ -54,10 +54,10 @@ interface AuthCodeVerificationResult {
  * @param ip Client IP
  * @param agent Client agent
  */
-export async function verifyAuthCode(app: App, authCode: string, ip: string, agent: string): Promise<AuthCodeVerificationResult> {
+export async function verifyAuthCode(app: App, authCode: string | undefined, ip: string, agent: string): Promise<AuthCodeVerificationResult> {
   const session: Store['auth']['sessions'][string] = authCode ? await kfs(`auth/sessions/${authCode}`) : null
   const result = verify()
-  if (!result.verified) {
+  if (!result.verified && authCode) {
     await logout(authCode)
   }
   return result

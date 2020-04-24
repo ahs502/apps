@@ -2,7 +2,7 @@ import kfs, { Store } from '../kfs'
 
 const currentVersion = 1
 
-type Book = Store['books'][string]
+type Book = NonNullable<Store['books'][string]>
 type TodoList = Book['list']
 type Todo = TodoList[number]
 

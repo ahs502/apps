@@ -12,7 +12,7 @@ router.post(
   withoutAuthentication(async (req, res, next) => {
     const { app, password } = req.body || {}
 
-    const authCode = await login(app, password, req.ip, req.headers['user-agent'])
+    const authCode = await login(app, password, req.ip, req.headers['user-agent']!)
 
     res
       .status(200)
@@ -31,9 +31,6 @@ router.post(
 
     await logout(authCode)
 
-    res
-      .status(200)
-      .send('Logged out.')
-      .end()
+    res.status(200).send('Logged out.').end()
   })
 )
