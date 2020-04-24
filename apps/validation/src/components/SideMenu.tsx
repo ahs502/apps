@@ -1,7 +1,7 @@
 import React from 'react'
 import { Paper, Theme, Box, List, ListItem, Typography, Divider } from '@material-ui/core'
 import { useTheme } from '@material-ui/styles'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import content from '../content'
 import useSections from '../utils/use-sections'
@@ -13,8 +13,10 @@ interface Props {
 export default function SideMenu({ onClick }: Props) {
   // const [expandedSideMenuItemCode, setExpandedSideMenuItemCode] = useState<string | null>(null)
   const theme = useTheme<Theme>()
+  const location = useLocation()
   const history = useHistory()
 
+  const absolutePathname = location.pathname.startsWith(`/${config.app}/`) || location.pathname === `/${config.app}` ? `/${config.app}` : ''
   const [section, subSection, subSubSection] = useSections()
 
   return (
@@ -26,7 +28,7 @@ export default function SideMenu({ onClick }: Props) {
               key={item.code}
               button
               onClick={() => {
-                history.push(`/${item.code}`)
+                history.push(`${absolutePathname}/${item.code}`)
                 onClick?.()
               }}
             >
@@ -43,7 +45,7 @@ export default function SideMenu({ onClick }: Props) {
                 button
                 dense
                 onClick={() => {
-                  history.push(`/${item.code}/${subItem.code}`)
+                  history.push(`${absolutePathname}/${item.code}/${subItem.code}`)
                   onClick?.()
                 }}
               >
@@ -68,7 +70,7 @@ export default function SideMenu({ onClick }: Props) {
                   button
                   dense
                   onClick={() => {
-                    history.push(`/${item.code}/${subItem.code}/${subSubItem.code}`)
+                    history.push(`${absolutePathname}/${item.code}/${subItem.code}/${subSubItem.code}`)
                     onClick?.()
                   }}
                 >
