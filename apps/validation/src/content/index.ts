@@ -13,13 +13,13 @@ console.log(content)
 
 export default content
 
-interface Section {
+export interface Section {
   code: string
   label: string
   markdown: string
   content?: Content
 }
-type Content = Section[]
+export type Content = Section[]
 
 function section(code: string, label: string, markdown: string, ...content: Content): Section {
   if (!code || !label) throw new Error('Invalid side menu item data.')

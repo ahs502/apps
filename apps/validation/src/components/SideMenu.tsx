@@ -1,9 +1,10 @@
 import React from 'react'
 import { Paper, Theme, Box, List, ListItem, Typography, Divider } from '@material-ui/core'
 import { useTheme } from '@material-ui/styles'
-import { useLocation, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import content from '../content'
+import useSections from '../utils/use-sections'
 
 interface Props {
   onClick?(): void
@@ -12,10 +13,9 @@ interface Props {
 export default function SideMenu({ onClick }: Props) {
   // const [expandedSideMenuItemCode, setExpandedSideMenuItemCode] = useState<string | null>(null)
   const theme = useTheme<Theme>()
-  const location = useLocation()
   const history = useHistory()
 
-  const [itemCode, subItemCode, subSubItemCode] = location.pathname.split('/').slice(1)
+  const [section, subSection, subSubSection] = useSections()
 
   return (
     <Box minWidth={theme.spacing(30)}>
@@ -32,7 +32,7 @@ export default function SideMenu({ onClick }: Props) {
             >
               <Typography
                 variant="h5"
-                color={item.code !== itemCode ? 'initial' : item.content?.some(({ code }) => code === subItemCode) ? 'primary' : 'secondary'}
+                color={item.code !== section?.code ? 'initial' : item.content?.some(({ code }) => code === subSection?.code) ? 'primary' : 'secondary'}
               >
                 {item.label}
               </Typography>
@@ -51,9 +51,9 @@ export default function SideMenu({ onClick }: Props) {
                   <Typography
                     variant="h6"
                     color={
-                      item.code !== itemCode || subItem.code !== subItemCode
+                      item.code !== section?.code || subItem.code !== subSection?.code
                         ? 'initial'
-                        : subItem.content?.some(({ code }) => code === subSubItemCode)
+                        : subItem.content?.some(({ code }) => code === subSubSection?.code)
                         ? 'primary'
                         : 'secondary'
                     }
@@ -75,7 +75,9 @@ export default function SideMenu({ onClick }: Props) {
                   <Box paddingLeft={8}>
                     <Typography
                       variant="subtitle1"
-                      color={item.code !== itemCode || subItem.code !== subItemCode || subSubItem.code !== subSubItemCode ? 'initial' : 'secondary'}
+                      color={
+                        item.code !== section?.code || subItem.code !== subSection?.code || subSubItem.code !== subSubSection?.code ? 'initial' : 'secondary'
+                      }
                     >
                       {subSubItem.label}
                     </Typography>
