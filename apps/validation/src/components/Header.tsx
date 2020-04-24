@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Typography, Box, Theme, Button, IconButton, Hidden } f
 import { makeStyles } from '@material-ui/styles'
 import { Menu as MenuIcon } from '@material-ui/icons'
 
+import { intractPathname } from '../../../core/location'
 import Icon from './Icon'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -50,7 +51,7 @@ export default function Header({ onSideMenuClick }: Props) {
           title="Visit the package in the NPM website"
         >
           &nbsp;
-          <img className={classes.npmLogo} src="/npm-logo.png" alt="NPM" />
+          <img className={classes.npmLogo} src={intractPathname('/npm-logo.png')} alt="NPM" />
           &nbsp;
           <Hidden smDown implementation="css">
             &nbsp;&nbsp;@ahs502/validation

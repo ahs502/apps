@@ -36,13 +36,13 @@ export default function Content() {
   return (
     <>
       {markdowns.map(({ key, markdown }) => (
-        <Box id={key} paddingTop={2}>
+        <Box key={key} id={key} paddingTop={2}>
           <Box position="relative" top={theme.spacing(8)}>
-            <ReactMarkdown key={key} source={markdown} />
+            <ReactMarkdown source={markdown} />
           </Box>
         </Box>
       ))}
-      <Box marginBottom={16} />
+      <Box key="margin buttom" marginBottom={16} />
     </>
   )
 }
