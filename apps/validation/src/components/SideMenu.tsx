@@ -1,5 +1,5 @@
 import React from 'react'
-import { Paper, Theme, Box, List, ListItem, Typography } from '@material-ui/core'
+import { Paper, Theme, Box, List, ListItem, Typography, IconButton } from '@material-ui/core'
 import { useTheme } from '@material-ui/styles'
 import { ExpandMore as ExpandMoreIcon, ExpandLess as ExpandLessIcon } from '@material-ui/icons'
 import { useHistory, useLocation } from 'react-router-dom'
@@ -44,7 +44,18 @@ export default function SideMenu({ onClick }: Props) {
                 {item.content && (
                   <>
                     <Box flexGrow={1} />
-                    {item.code === section?.code ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                    {item.code === section?.code ? (
+                      <ExpandLessIcon />
+                    ) : (
+                      <IconButton
+                        onClick={event => {
+                          history.push(intractPathname(`/${item.code}`))
+                          event.stopPropagation()
+                        }}
+                      >
+                        <ExpandMoreIcon />
+                      </IconButton>
+                    )}
                   </>
                 )}
               </ListItem>,
