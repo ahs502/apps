@@ -36,16 +36,19 @@ export default function Content() {
 
   return (
     <>
-      {/* {markdowns.map(({ key, markdown }) => (
-        <Box key={key} id={key} paddingTop={2}>
-          <Box position="relative" top={theme.spacing(8)}>
-            <ReactMarkdown source={markdown} />
-          </Box>
+      {config.env === 'production' ? (
+        <Box textAlign="center" paddingTop={20}>
+          <img src={intractPathname('/under-construction.png')} alt="This page is under construction." />
         </Box>
-      ))} */}
-      <Box textAlign="center" paddingTop={20}>
-        <img src={intractPathname('/under-construction.png')} alt="This page is under construction." />
-      </Box>
+      ) : (
+        markdowns.map(({ key, markdown }) => (
+          <Box key={key} id={key} paddingTop={2}>
+            <Box position="relative" top={theme.spacing(8)}>
+              <ReactMarkdown source={markdown} />
+            </Box>
+          </Box>
+        ))
+      )}
       <Box key="margin buttom" marginBottom={16} />
     </>
   )
