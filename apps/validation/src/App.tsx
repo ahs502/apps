@@ -33,7 +33,7 @@ export default function App() {
         <Box display="flex">
           {/* Fixed side menu placeholder */}
           <Hidden mdDown>
-            <Box flex={`0 0 ${theme.spacing(25)}px`} />
+            <Box flex={`0 0 ${theme.spacing(30)}px`} />
           </Hidden>
 
           <Container maxWidth="lg">

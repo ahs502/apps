@@ -1,9 +1,9 @@
-import React /* useState */ from 'react'
+import React from 'react'
 import { Paper, Theme, Box, List, ListItem, Typography, Divider } from '@material-ui/core'
 import { useTheme } from '@material-ui/styles'
 import { useLocation, useHistory } from 'react-router-dom'
 
-import sideMenuItemsData from '../utils/side-menu-items-data'
+import content from '../content'
 
 interface Props {
   onClick?(): void
@@ -21,7 +21,7 @@ export default function SideMenu({ onClick }: Props) {
     <Box minWidth={theme.spacing(30)}>
       <Paper square variant="outlined">
         <List>
-          {sideMenuItemsData.flatMap(item => [
+          {content.flatMap(item => [
             <ListItem
               key={item.code}
               button
@@ -32,12 +32,12 @@ export default function SideMenu({ onClick }: Props) {
             >
               <Typography
                 variant="h5"
-                color={item.code !== itemCode ? 'initial' : item.subItems?.some(({ code }) => code === subItemCode) ? 'primary' : 'secondary'}
+                color={item.code !== itemCode ? 'initial' : item.content?.some(({ code }) => code === subItemCode) ? 'primary' : 'secondary'}
               >
                 {item.label}
               </Typography>
             </ListItem>,
-            ...(item.subItems || []).flatMap(subItem => [
+            ...(item.content || []).flatMap(subItem => [
               <ListItem
                 key={`${item.code}/${subItem.code}`}
                 button
@@ -53,7 +53,7 @@ export default function SideMenu({ onClick }: Props) {
                     color={
                       item.code !== itemCode || subItem.code !== subItemCode
                         ? 'initial'
-                        : subItem.subItems?.some(({ code }) => code === subSubItemCode)
+                        : subItem.content?.some(({ code }) => code === subSubItemCode)
                         ? 'primary'
                         : 'secondary'
                     }
@@ -62,7 +62,7 @@ export default function SideMenu({ onClick }: Props) {
                   </Typography>
                 </Box>
               </ListItem>,
-              ...(subItem.subItems || []).map(subSubItem => (
+              ...(subItem.content || []).map(subSubItem => (
                 <ListItem
                   key={`${item.code}/${subItem.code}/${subSubItem.code}`}
                   button
@@ -83,7 +83,7 @@ export default function SideMenu({ onClick }: Props) {
                 </ListItem>
               ))
             ]),
-            item !== sideMenuItemsData[sideMenuItemsData.length - 1] && <Divider key={`${item.code} separator`} />
+            item !== content[content.length - 1] && <Divider key={`${item.code} separator`} />
           ])}
         </List>
       </Paper>
