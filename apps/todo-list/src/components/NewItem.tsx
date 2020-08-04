@@ -33,8 +33,8 @@ export default function NewItem({ disabled, onAdd }: Props) {
 
   return (
     <Paper variant="outlined" square>
-      <Box padding={2} display="flex" alignItems="center" style={{ backgroundColor: theme.palette.background.default }}>
-        <Box marginRight={2}>
+      <Box padding={1} display="flex" alignItems="center" style={{ backgroundColor: theme.palette.background.default }}>
+        <Box marginRight={1}>
           <IconButton
             disabled={disabled || true}
             title="Select"
@@ -49,9 +49,10 @@ export default function NewItem({ disabled, onAdd }: Props) {
           innerRef={inputRef}
           fullWidth
           variant="outlined"
+          size="small"
           inputProps={{
             style: {
-              fontSize: theme.spacing(3),
+              fontSize: theme.spacing(2.5),
               height: theme.spacing(2),
               textAlign: rtl ? 'right' : 'left',
               direction: rtl ? 'rtl' : 'ltr'
@@ -64,7 +65,7 @@ export default function NewItem({ disabled, onAdd }: Props) {
           onChange={({ target: { value } }) => setTitle(value)}
           onKeyDown={event => event.keyCode === 13 && add()}
         />
-        <Box marginRight={1} marginLeft={2}>
+        <Box marginLeft={1}>
           <IconButton disabled={disabled || !title} title="Add" onClick={() => add()}>
             <AddIcon />
           </IconButton>

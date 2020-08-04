@@ -31,16 +31,17 @@ export default function Item({ item, index, dragging, disabled, onCheck, onEdit,
     return (
       <ClickAwayListener onClickAway={event => setEditMode(false)}>
         <Paper elevation={6}>
-          <Box padding={2} display="flex" alignItems="center">
-            <Box marginRight={2}>
+          <Box padding={1} display="flex" alignItems="center">
+            <Box marginRight={1}>
               <Checkbox color="secondary" checked={!!item.checked} disabled={true} />
             </Box>
             <TextField
               fullWidth
               variant="outlined"
+              size="small"
               inputProps={{
                 style: {
-                  fontSize: theme.spacing(3),
+                  fontSize: theme.spacing(2.5),
                   height: theme.spacing(2),
                   textAlign: rtl ? 'right' : 'left',
                   direction: rtl ? 'rtl' : 'ltr'
@@ -53,7 +54,7 @@ export default function Item({ item, index, dragging, disabled, onCheck, onEdit,
               onChange={({ target: { value } }) => setEditedTitle(value)}
               onKeyDown={event => event.keyCode === 13 && apply()}
             />
-            <Box marginRight={1} marginLeft={2}>
+            <Box marginLeft={1}>
               <IconButton disabled={disabled} title="Apply" onClick={() => apply()}>
                 <CheckIcon />
               </IconButton>
@@ -68,8 +69,8 @@ export default function Item({ item, index, dragging, disabled, onCheck, onEdit,
 
   return (
     <Paper elevation={2}>
-      <Box padding={2} display="flex" alignItems="center">
-        <Box marginRight={2}>
+      <Box padding={1} display="flex" alignItems="center">
+        <Box marginRight={1}>
           <Checkbox color="secondary" checked={!!item.checked} disabled={disabled} onChange={(event, checked) => onCheck?.(checked)} />
         </Box>
         <Typography
@@ -77,13 +78,13 @@ export default function Item({ item, index, dragging, disabled, onCheck, onEdit,
           align="center"
           style={{
             flexGrow: 1,
-            fontSize: theme.spacing(3),
-            lineHeight: `calc(${theme.spacing(6)}px + 5px)`
+            fontSize: theme.spacing(2.5),
+            lineHeight: `calc(${theme.spacing(5)}px + 4px)`
           }}
         >
           {item.title}
         </Typography>
-        <Box marginRight={1} marginLeft={2}>
+        <Box marginLeft={1}>
           <IconButton
             disabled={disabled}
             title="Edit"

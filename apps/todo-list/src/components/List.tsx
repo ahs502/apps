@@ -62,7 +62,7 @@ export default function List({ book, disabled, onAdd, onCheck, onEdit, onRemove,
           </Box>
         ) : (
           <>
-            <Box marginBottom={2}>
+            <Box marginBottom={1.5}>
               <NewItem disabled={disabled} onAdd={onAdd && (async title => onAdd(title, false))} />
             </Box>
 
@@ -78,7 +78,7 @@ export default function List({ book, disabled, onAdd, onCheck, onEdit, onRemove,
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             style={{
-                              marginBottom: theme.spacing(2),
+                              marginBottom: theme.spacing(1.5),
                               ...provided.draggableProps.style
                             }}
                           >

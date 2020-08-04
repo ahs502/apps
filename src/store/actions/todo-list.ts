@@ -47,7 +47,8 @@ export async function addTodo(bookName: string, bookTimestamp: number, title: st
   if (oldBook.timestamp > bookTimestamp) throw new Error('Your list is outdated, please refresh.')
   const newTodo: Todo = {
     id: oldBook.idBase,
-    title
+    title,
+    checked: true
   }
   const newBook: Book = {
     version: currentVersion,
