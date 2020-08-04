@@ -1,19 +1,4 @@
-const content: Content = [
-  section('introduction', 'Introduction', require('../content/introduction.md').default),
-  section(
-    'tutorial',
-    'Tutorial',
-    require('../content/tutorial.md').default,
-    section(
-      'basics',
-      'Basics',
-      require('../content/tutorial/basics.md').default,
-      section('aaa', 'A a a', require('../content/tutorial/basics/aaa.md').default),
-      section('bbb', 'B b b', require('../content/tutorial/basics/bbb.md').default)
-    ),
-    section('advances', 'Advances', require('../content/tutorial/advances.md').default)
-  )
-]
+const content: Content = [section('introduction', 'Introduction', require('../content/introduction.md').default)]
 
 export default content
 

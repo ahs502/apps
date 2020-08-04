@@ -1,94 +1,167 @@
-## Title
+# Introduction
 
-- First item
-- Second item
+The `@ahs502/validation` library is a flexible fully flaged **data validation** tool that let's you apply all sorts of **structural** and **contextual** checks on _JSON like_ data formats (forms, requests payload, documents, )
 
-**Bold** _italic_
 
-# a
 
-b
 
-c
 
-d
 
-# a
 
-b
 
-c
 
-d
 
-# a
 
-b
 
-c
 
-d
 
-# a
 
-b
 
-c
 
-d
 
-# a
 
-b
 
-c
 
-d
 
-# a
 
-b
+---------------------
+<br><br><br><br><br><br><br><br>
 
-c
+#### A universal client/server side data model validation.
 
-d
+Have you ever struggled validating forms with _complex_ and _dynamic_ data structures?
 
-# a
+Have you ever tried to validate each field from _different aspects_ and generate _accurate error messages_ on each one telling exactly what is wrong with that field?
 
-b
+Are you tired from those stupid rule definitions and wish to be able to freely apply all sorts of custom checks on your data directly by _JavaScript native expressions_?
 
-c
+Did you have a hard time to implement _cross field validations_ or _sequential/conditional checks_ on your data?
 
-d
+Have you ever thought about implementing validation on your data model _once_ and use it _both_ within the _client_ and the _server_ side code?
 
-# a
+If the answer is **_yes_**, then `@ahs502/validation` system is here to save the day!
 
-b
+- Very **simple**, yet very **powerful**
+- No rules, no conventions, just **plain JavaScript expressions to check things**
+- Full **TypeScript** support, as well as **JavaScript**
+- Support for **asynchronous**, **synchronous** and **mixed** checks
+- A lot of freedom to check things in **all sorts of ways**
+- Capability to apply **complex logics** and **arbitrary orders** to check everything
+- **Easy** to learn, **enjoyful** to implement
 
-c
+All you need to import is:
 
-d
+```typescript
+import Validation from '@ahs502/validation'
+```
 
-# a
+In **TypeScript**:
 
-b
+```typescript
+interface Point {
+  x: number
+  y: number
+}
 
-c
+class PointValidation extends Validation<
+  'X_IS_VALID' | 'Y_IS_VALID' | 'IS_WITHIN_RANGE'
+> {
+  constructor({ x, y }: Point, range: number) {
+    super(validator => {
+      validator.check('X_IS_VALID', !isNaN(x), 'x is invalid.')
+      validator.check('Y_IS_VALID', !isNaN(y), 'y is invalid.')
+      validator
+        .when('X_IS_VALID', 'Y_IS_VALID')
+        .check(
+          'IS_WITHIN_RANGE',
+          () => Math.sqrt(x ** 2 + y ** 2) <= range,
+          'The point is out of range.'
+        )
+    })
+  }
+}
+```
 
-d
+Or, in **JavaScript**:
 
-# a
+```javascript
+class PointValidation extends Validation {
+  constructor({ x, y }, range) {
+    super(validator => {
+      validator.check('X_IS_VALID', !isNaN(x), 'x is invalid.')
+      validator.check('Y_IS_VALID', !isNaN(y), 'y is invalid.')
+      validator
+        .when('X_IS_VALID', 'Y_IS_VALID')
+        .check(
+          'IS_WITHIN_RANGE',
+          () => Math.sqrt(x ** 2 + y ** 2) <= range,
+          'The point is out of range.'
+        )
+    })
+  }
+}
+```
 
-b
+The usage is like:
 
-c
+```typescript
+const p1 = { x: 1, y: 2 }
+const v1 = new PointValidation(p1, 10)
+v1.ok           // true
+v1.badges       // ['X_IS_VALID', 'Y_IS_VALID', 'IS_WITHIN_RANGE']
+v1.failedBadges // []
+v1.messages()   // []
+```
 
-d
+```typescript
+const p2 = { x: -3, y: NaN }
+const v2 = new PointValidation(p2, 10)
+v2.ok           // false
+v2.badges       // ['X_IS_VALID']
+v2.failedBadges // ['Y_IS_VALID']
+v2.messages()   // ['y is invalid.']
+```
 
-# a
+```typescript
+const p3 = { x: 100, y: 100 }
+const v3 = new PointValidation(p3, 10)
+v3.ok           // false
+v3.badges       // ['X_IS_VALID', 'Y_IS_VALID']
+v3.failedBadges // ['IS_WITHIN_RANGE']
+v3.messages()   // ['The point is out of range.']
+```
 
-b
+## Installation
 
-c
+```shell
+$ npm install @ahs502/validation
+```
 
-d
+## Documentation
+
+This [documentation](https://ahs502.ir/validation/) contains tutorials, examples and API details.
+
+## Development
+
+Run tests (Powered by _jest_):
+
+```shell
+$ npm test
+```
+
+Build the project into the `dist` folder:
+
+```shell
+$ npm run build
+```
+
+> It's recommended to use _VS Code_ IDE with _Prettier_ extension installed.
+
+## Contribution
+
+It would be appreciated if you had any suggestion or contribution on this package or detected any bug.
+
+- See the code on [GitHub.com](https://github.com/ahs502/validation)
+- See the package on [npmjs.com](https://www.npmjs.com/package/@ahs502/validation)
+- Contact me by [my gmail](ahs502@gmail.com) _(Hessamoddin A Shokravi)_
+
